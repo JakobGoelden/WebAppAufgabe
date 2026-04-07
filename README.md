@@ -6,6 +6,7 @@ Gemeinsames Github repo
 Wenn es geht in VS Code/VS Codium clonen und mit `git switch <Name>`
 Alternativ wenn das nicht geht einen codespace Nutzen
 
+### Git Befehle
 
 ## Codespaces
 1. Auf code dann auf codespaces. Den eigenen auswählen
