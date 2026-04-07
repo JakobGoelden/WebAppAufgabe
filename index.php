@@ -9,7 +9,7 @@
     
 </head>
 <body>
-    <?php include '/template/navbar.php'; ?>
+    <?php include './template/navbar.php'; ?>
 
 
     <!--<p style="display: flex; direction: rtl;" ><a class="admin" href="auth.php">Admin</a></p>-->
