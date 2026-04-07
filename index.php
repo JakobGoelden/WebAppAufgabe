@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 ?>
 <!DOCTYPE html>
@@ -23,4 +24,5 @@
   
 </body>
 </html>
+
 
