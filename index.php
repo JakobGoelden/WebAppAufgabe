@@ -1,13 +1,12 @@
 <?php
-require_once("init.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <!-- <meta http-equiv="refresh" content="5; URL=http://localhost/test.html" > -->
 <head>
     <meta charset="UTF-8">
-    <title>Möööööritz</title>
-    <link rel="stylesheet" href="style.css">
+    <title>WebApp Aufgabe</title>
+    
 </head>
 <body>
     <?php include 'navbar.php'; ?>
