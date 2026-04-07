@@ -5,8 +5,8 @@
 <!-- <meta http-equiv="refresh" content="5; URL=http://localhost/test.html" > -->
 <head>
     <meta charset="UTF-8">
-    <title>WebApp Aufgabe</title>
-    
+    <title>Möööööritz</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <?php include './template/navbar.php'; ?>
