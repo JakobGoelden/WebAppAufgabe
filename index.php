@@ -9,19 +9,18 @@
     
 </head>
 <body>
-    <?php include 'navbar.php'; ?>
+    <?php include '/template/navbar.php'; ?>
 
 
     <!--<p style="display: flex; direction: rtl;" ><a class="admin" href="auth.php">Admin</a></p>-->
-    <h1>MyProject.local is running on Fedora Apache + PHP</h1>
-    <p>Current server time: <strong><span id="Uhr">Laedt...</span></strong></p>
+    <h1>MyProject.local is running</h1>
+  
 
-
-    <p>Try <a class="underline" href="form.php">a PHP form</a> to test dynamic input.</p>
-    <p>Try <a class="underline" href="test.php">Subsite</a> to test links</p>
+    <p>Try <a class="underline">a PHP form</a> to test dynamic input.</p>
+    <p>Try <a class="underline">Subsite</a> to test links</p>
     <br>
 
-    <script src="script.js"></script>
+  
 </body>
 </html>
 
