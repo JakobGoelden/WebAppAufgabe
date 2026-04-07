@@ -13,6 +13,7 @@ git checkout main
 git pull origin main
 git switch <name>
 git config pull.rebase true # Nur beim ersten mal
+git branch --set-upstream-to=origin/feature-x # Nur beim ersten Mal
 ```
 #### Änderungen in den eigenen Branch schieben
 ```
