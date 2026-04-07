@@ -6,7 +6,7 @@
 <!-- <meta http-equiv="refresh" content="5; URL=http://localhost/test.html" > -->
 <head>
     <meta charset="UTF-8">
-    <title>Möööööritz</title>
+    <title>WebApp Projekt</title>
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
