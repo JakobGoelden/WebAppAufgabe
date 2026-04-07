@@ -12,6 +12,7 @@ Alternativ wenn das nicht geht einen codespace Nutzen
 git checkout main
 git pull origin main
 git switch <name>
+git config pull.rebase true # Nur beim ersten mal
 ```
 #### Änderungen in den eigenen Branch schieben
 ```
