@@ -26,14 +26,14 @@ git push origin <name>
 git checkout main
 git pull origin main
 git merge <name>
-git push origin main
+git push origin magit push origin <name> --force-with-leasein
 # Danach in den eigenen zurück
 ```
 #### Änderungen von anderen in den Branch setzen
 ```
 git fetch origin main
 git rebase origin/main
-git push origin <name> --force-with-lease
+
 ```
 
 ## Codespaces
