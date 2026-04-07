@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Möööööritz</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
     <?php include './template/navbar.php'; ?>
