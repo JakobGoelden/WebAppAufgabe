@@ -109,7 +109,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         // start login logging
                         // if login good, log the successful attempt
                         $status = 1;
-                        $ip_address = get_secure_ip(); //get ip from user
+                        // $ip_address = get_secure_ip(); //get ip from user
+                        $ip_address = "127.0.0.1"; // dummy ip
                         $user_id = $user['id']; // get user id from db
                         $sql_log = "INSERT INTO login_logs (user_id, ip_address, success) VALUES (?, ?, ?)"; //log data
                         $stmt_log = $conn->prepare($sql_log);
@@ -129,8 +130,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $error_message = "Falsches Passwort.";
                         //log failed login attempt
                         $status = 0;
-                        //ip_address = get_secure_ip();
-                        ip_address = 1;
+                        // $ip_address = get_secure_ip();
+                        $ip_address = "127.0.0.1"; // dummy ip
                         $user_id = $user['id'];
                         $sql_log = "INSERT INTO login_logs (user_id, ip_address, success) VALUES (?, ?, ?)";
                         $stmt_log = $conn->prepare($sql_log);
@@ -144,8 +145,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     // start login logging
                     //same as first logging, just with clear text psswd.
                     $status = 1;
-                    //ip_address = get_secure_ip();
-                    ip_address = 1;
+                    // $ip_address = get_secure_ip();
+                    $ip_address = "127.0.0.1"; // dummy ip
                     $user_id = $user['id'];
                     $sql_log = "INSERT INTO login_logs (user_id, ip_address,success) VALUES (?, ?, ?)";
                     $stmt_log = $conn->prepare($sql_log);
@@ -177,8 +178,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     //wrong password but plain
                     $error_message = "Falsches Passwort.";
                     $status = 0; //log failed attempt
-                    //ip_address = get_secure_ip();
-                    ip_address = 1;
+                    // $ip_address = get_secure_ip();
+                    $ip_address = "127.0.0.1"; // dummy ip
                     $user_id = $user['id'];
                     $sql_log = "INSERT INTO login_logs (user_id, ip_address, success) VALUES (?, ?, ?)";
                     $stmt_log = $conn->prepare($sql_log);
@@ -221,7 +222,6 @@ $action = $_GET['action'] ?? 'login'; // default login page looks for action par
 </head>
 <body>
 <?php include 'navbar.php'; ?>
-<!-- error or success message-->
 <?php if ($error_message): ?>
     <p class="error"><?php echo $error_message; ?></p>
 <?php endif; ?>
@@ -232,7 +232,6 @@ $action = $_GET['action'] ?? 'login'; // default login page looks for action par
 
 <?php if ($action === 'register'): ?>
 
-    <!--register form-->
     <form action="auth.php?action=register" method="POST">
         <h1>Registrieren</h1>
         <p>Erstelle einen neuen Account.</p>
@@ -244,7 +243,6 @@ $action = $_GET['action'] ?? 'login'; // default login page looks for action par
             <label for="password">Passwort:</label><br>
             <input type="password" id="password" name="password" required>
         </div>
-        <!-- sets action to register -->
         <button type="submit" name="register">Registrieren</button>
         <div class="toggle-link">
             Hast du schon einen Account? <a href="auth.php?action=login">Hier einloggen</a>
@@ -253,7 +251,6 @@ $action = $_GET['action'] ?? 'login'; // default login page looks for action par
 
 <?php else: ?>
 
-    <!--Login Form-->
     <form action="auth.php?action=login" method="POST">
         <h1>Admin Login</h1>
         <div>
@@ -264,7 +261,6 @@ $action = $_GET['action'] ?? 'login'; // default login page looks for action par
             <label for="password">Passwort:</label><br>
             <input type="password" id="password" name="password" required>
         </div>
-        <!--action login -->
         <button type="submit" name="login">Login</button>
         <div class="toggle-link">
             Noch kein Account? <a href="auth.php?action=register">Hier registrieren</a>
