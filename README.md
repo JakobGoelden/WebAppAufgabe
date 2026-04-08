@@ -14,7 +14,5 @@
 
 ### Merge and Clean Up
 1.  Push: `git push origin <feature>`
-2.  Create a Pull Request. (Check if the version runs of XAMPP to approve)
-4.  After approval, merge the PR.
-5.  Delete the branch: `git push origin --delete <feature>`
-6.  Cleanup local references: `git fetch --prune`   
+2.  Create a Pull Request (Check if the version runs of XAMPP to approve)
+4.  After approval, merge the Pull Request 
