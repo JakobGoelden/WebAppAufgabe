@@ -4,8 +4,10 @@
     box-sizing: border-box;
 } /*universal reset for all margins*/
 
-body{
-    margin: 0;
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    outline: 5px solid blue; /* Zeigt dir die Grenze des Body */
 }
 
 h1 {

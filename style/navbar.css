@@ -10,7 +10,3 @@
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     outline: 5px solid red;
 }
-
-body {
-    outline: 5px solid blue; /* Zeigt dir die Grenze des Body */
-}
