@@ -9,7 +9,7 @@
     color: rgb(255, 255, 255);
     box-shadow: 0 0.125em 0.625em rgba(0,0,0,0.2);
 
-    padding: 1em 2.5em;
+    padding: 1.5em;
 }
 
 .nav-left a {
@@ -26,6 +26,7 @@
     border-radius: 0.25em;
     cursor: pointer;
     font-weight: bold;
+    line-height: 1;
     transition: background 0.3s;
 }
 
