@@ -10,7 +10,7 @@
 <body>
     <?php include './template/navbar.php'; ?>
 
-    <h1>MyProject.local is running</h1>
+    <h1>Placeholder</h1>
 
     <p>Try <a class="underline">a PHP form</a> to test dynamic input.</p>
     <p>Try <a class="underline">Subsite</a> to test links</p>
@@ -19,5 +19,3 @@
     <?php include './template/footer.php'; ?>
 </body>
 </html>
-
-
