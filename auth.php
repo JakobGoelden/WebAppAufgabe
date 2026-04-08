@@ -209,7 +209,7 @@ $action = $_GET['action'] ?? 'login'; // default login page looks for action par
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style/main.css">
     <style>
         body { font-family: sans-serif; text-align: center; }
         form { background: #f4f4f4; border: 1px solid #ccc; padding: 20px; max-width: 400px; margin: 20px auto; }
