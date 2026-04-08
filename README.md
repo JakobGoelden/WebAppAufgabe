@@ -7,9 +7,10 @@
 2.  Create & switch: `git checkout -b <feature>`
 3.  Make changes, then commit: `git add . && git commit -m "Add feature"`
 
-### Rebase onto Main
+### Rebase onto Main & Pull Changes made by others
 1.  Fetch latest: `git fetch origin`
 2.  Rebase: `git rebase origin/main`
+3.  Pull: `git pull`
 
 ### Merge and Clean Up
 1.  Push: `git push origin <feature>`
