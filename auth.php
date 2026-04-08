@@ -221,7 +221,7 @@ $action = $_GET['action'] ?? 'login'; // default login page looks for action par
     </style>
 </head>
 <body>
-<?php include 'navbar.php'; ?>
+<?php include './template/navbar.php'; ?>
 <?php if ($error_message): ?>
     <p class="error"><?php echo $error_message; ?></p>
 <?php endif; ?>
@@ -252,7 +252,7 @@ $action = $_GET['action'] ?? 'login'; // default login page looks for action par
 <?php else: ?>
 
     <form action="auth.php?action=login" method="POST">
-        <h1>Admin Login</h1>
+        <h1>Login</h1>
         <div>
             <label for="username">Benutzername:</label><br>
             <input type="text" id="username" name="username" required>
