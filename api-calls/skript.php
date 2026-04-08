@@ -1,9 +1,7 @@
 <?php
-function checkEmailLeaks($email) {
+function sendApiRequest($email, $apiKey, $baseUrl) {
 
-    $apiKey = 'DEIN_API_KEY'; 
-    $url = "https://haveibeenpwned.com/api/v3/breachedaccount/" . urlencode($email);
-
+    $url = $baseUrl . urlencode($email);
 
     $ch = curl_init();
 
@@ -13,54 +11,34 @@ function checkEmailLeaks($email) {
 
     curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 
-
-
     $headers = [
 
         "hibp-api-key: $apiKey",
-
-        "user-agent: SecurityHub-Uni-Project"
+        "user-agent: MyCustomApp"
 
     ];
-
 
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
     $response = curl_exec($ch);
-
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-
 
     curl_close($ch);
 
-
     if ($httpCode === 200) {
-
-        return json_decode($response, true); 
+        
+        return json_decode($response, true);
+    }
+     elseif ($httpCode === 404)
+    {
+        return [];
 
     } 
-    elseif ($httpCode === 404) {
-
-        return []; 
-
-    } 
+    
     else {
 
-        return "Fehler beim Abrufen: Statuscode " . $httpCode;
+        return "Error: " . $httpCode;
     }
-
 }
 ?>
-
-
-
-
-
-
-
-
-
-?>
-
 
