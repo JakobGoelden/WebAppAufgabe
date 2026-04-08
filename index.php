@@ -17,5 +17,7 @@
     <br>
 
     <?php include './template/footer.php'; ?>
+    <?php include './api-calls/skript.php'; ?>
+
 </body>
 </html>
