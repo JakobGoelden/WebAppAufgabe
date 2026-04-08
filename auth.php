@@ -11,8 +11,8 @@ require_once ("init.php");
 
 //db inputs hardcoded, need to be loaded via ajax in main file soon
 $servername = "localhost";
-$username_db   = "myuser";
-$password_db   = "StrongPassword123";
+$username_db   = "root";
+$password_db   = "";
 $dbname     = "users";
 //build db connection
 $conn = new mysqli($servername, $username_db, $password_db, $dbname); //new object in sqli class, try's to connect with db
