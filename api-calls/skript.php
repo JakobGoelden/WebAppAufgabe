@@ -26,11 +26,12 @@ function sendApiRequest($email, $apiKey, $baseUrl) {
     curl_close($ch);
 
     if ($httpCode === 200) {
-        
+
         return json_decode($response, true);
     }
-     elseif ($httpCode === 404)
-    {
+
+    elseif ($httpCode === 404){
+
         return [];
 
     } 
@@ -40,5 +41,6 @@ function sendApiRequest($email, $apiKey, $baseUrl) {
         return "Error: " . $httpCode;
     }
 }
+
 ?>
 
