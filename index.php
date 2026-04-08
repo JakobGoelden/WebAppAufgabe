@@ -1,6 +1,7 @@
 <?php
-
-?><!DOCTYPE html>
+require_once("init.php");?>
+<p><?php echo $is_logged_in; ?></p>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
