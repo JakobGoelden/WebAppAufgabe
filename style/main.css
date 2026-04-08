@@ -3,14 +3,3 @@
     padding: 0;
     box-sizing: border-box;
 } /*universal reset for all margins*/
-
-html, body {
-    margin: 0 !important;
-    padding: 0 !important;
-    outline: 5px solid blue; /* Zeigt dir die Grenze des Body */
-}
-
-h1 {
-    margin-top: 0;
-    padding-top: 20px; /* Nutze Padding für Abstand, nicht Margin! */
-}

@@ -8,5 +8,28 @@
     background-color: gray;
     color: rgb(255, 255, 255);
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    outline: 5px solid red;
+
+    padding: 20px 40px;
 }
+
+.nav-left a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.nav-button {
+    padding: 8px 20px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.nav-button:hover {
+    background-color: #ddd;
+}
+
