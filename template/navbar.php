@@ -8,6 +8,8 @@
     </div>
 
     <div class="nav-right">
-        <button class="nav-button">Login</button>
+        <button class="nav-button">
+            <a href="auth.php">Login</a>
+        </button>
     </div>
 </nav>
