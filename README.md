@@ -15,4 +15,4 @@
 ### Merge and Clean Up
 1.  Push: `git push origin <feature>`
 2.  Create a Pull Request (Check if the version runs of XAMPP to approve)
-4.  After approval, merge the Pull Request 
+4.  After approval, merge the Pull Request
