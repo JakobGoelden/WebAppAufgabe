@@ -129,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $error_message = "Falsches Passwort.";
                         //log failed login attempt
                         $status = 0;
-                        $ip_address = get_secure_ip();
+                        //ip_address = get_secure_ip();
                         $user_id = $user['id'];
                         $sql_log = "INSERT INTO login_logs (user_id, ip_address, success) VALUES (?, ?, ?)";
                         $stmt_log = $conn->prepare($sql_log);
