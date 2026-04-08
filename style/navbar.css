@@ -1,0 +1,36 @@
+.navbar{
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: gray;
+    color: rgb(255, 255, 255);
+    box-shadow: 0 0.125em 0.625em rgba(0,0,0,0.2);
+
+    padding: 1.25em;
+}
+
+.nav-left a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.nav-button {
+    padding: 0.5em 0.5em;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 0.25em;
+    cursor: pointer;
+    font-weight: bold;
+    line-height: 1;
+    transition: background 0.3s;
+}
+
+.nav-button:hover {
+    background-color: #ddd;
+}
+
