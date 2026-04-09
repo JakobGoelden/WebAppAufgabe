@@ -7,6 +7,22 @@
         <a href="index.php">WebAppName</a>
     </div>
 
+    <div class="subsite">
+        <a href="index.php">Subsite1</a>
+    </div>
+
+    <div class="subsite">
+        <a href="index.php">Subsite2</a>
+    </div>
+
+    <div class="subsite">
+        <a href="index.php">Subsite3</a>
+    </div>
+
+    <div class="subsite">
+        <a href="index.php">Subsite4</a>
+    </div>
+
     <div class="nav-right">
         <button class="nav-button">
             <a href="auth.php">Login</a>

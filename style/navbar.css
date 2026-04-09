@@ -21,6 +21,12 @@
     font-weight: bold;
 }
 
+.subsite a {
+    color: white;
+    text-decoration: none;
+    font-size: 1em;
+}
+
 .nav-button {
     padding: 0.5em 0.5em;
     background-color: #f0f0f0;
