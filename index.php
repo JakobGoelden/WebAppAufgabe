@@ -11,12 +11,6 @@ require_once("init.php");?>
 <body>
     <?php include './template/navbar.php'; ?>
 
-    <h1>Placeholder</h1>
-
-    <p>Try <a class="underline">a PHP form</a> to test dynamic input.</p>
-    <p>Try <a class="underline">Subsite</a> to test links</p>
-    <br>
-
     <?php include './template/footer.php'; ?>
 </body>
 </html>
