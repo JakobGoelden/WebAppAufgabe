@@ -62,7 +62,9 @@ require_once("init.php");?>
     <div name="Titel">
     </div>
 
-    <div name="Links">
+    <div name="Links" class="container">
+        <div name="feature1" class="subsite"></div>
+        <div name="feature2" class="subsite"></div>
     </div>
 
     <?php include './template/footer.php'; ?>
