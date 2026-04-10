@@ -12,9 +12,22 @@ require_once("init.php");?>
     <?php include './template/navbar.php'; ?>
 
     <div name="Titel">
+        <h1>Titel</h1>
     </div>
 
     <div name="Links" class="container">
+        <div>
+            <div name="feature1" class="subsite"></div>
+        </div>
+        <div>
+            <div name="feature2" class="subsite"></div>
+        </div>
+        <div>
+            <div name="feature1" class="subsite"></div>
+        </div>
+        <div>
+            <div name="feature2" class="subsite"></div>
+        </div>
         <div>
             <div name="feature1" class="subsite"></div>
         </div>

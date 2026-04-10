@@ -1,9 +1,20 @@
+body {
+  background-color: rgb(50,50,50);
+  color: white;
+}
+
+h1 {
+    text-align: center;
+}
+
 .container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-content: center;
-  gap: 10px; 
+  row-gap: 50px;
+  column-gap: 100px;
+  margin: 1%;
 }
 
 .container > div {
@@ -12,8 +23,9 @@
 }
 
 .subsite {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   background-color: gray;
   border-radius: 15px;
+  box-shadow: 0 0.125em 0.625em rgba(0,0,0,0.2);
 }
