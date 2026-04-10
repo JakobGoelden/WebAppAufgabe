@@ -11,6 +11,12 @@ require_once("init.php");?>
 <body>
     <?php include './template/navbar.php'; ?>
 
+    <div name="Titel">
+    </div>
+
+    <div name="Links">
+    </div>
+
     <?php include './template/footer.php'; ?>
 </body>
 </html>
