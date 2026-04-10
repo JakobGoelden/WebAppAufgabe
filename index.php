@@ -60,6 +60,7 @@ require_once("init.php");?>
     
 
     <div name="Titel">
+        <h1>Titel</h1>
     </div>
 
     <div name="Links" class="container">
