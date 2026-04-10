@@ -1,8 +1,18 @@
 .container {
   display: flex;
-  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 10px; 
 }
 
 .container > div {
   flex: 1;
+}
+
+.subsite {
+  width: 200px;
+  height: 200px;
+  background-color: gray;
+  border-radius: 15px;
 }
