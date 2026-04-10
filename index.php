@@ -59,6 +59,12 @@ require_once("init.php");?>
         </div>
     
 
+    <div name="Titel">
+    </div>
+
+    <div name="Links">
+    </div>
+
     <?php include './template/footer.php'; ?>
 </body>
 </html>
