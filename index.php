@@ -68,6 +68,11 @@ require_once("init.php");?>
         <div name="feature2" class="subsite"></div>
     </div>
 
+                <p>Try <a class="underline">a PHP form</a> to test dynamic input.</p>
+                <p>Try <a class="underline">Subsite</a> to test links</p>
+        </div>
+    
+
     <?php include './template/footer.php'; ?>
 </body>
 </html>
