@@ -22,7 +22,6 @@ require_once("init.php");
     </div>
 
     <div class="content">
-                <h1>Placeholder</h1>
                 <div name="Links" class="container">
         <div>
             <div name="feature1" class="subsite"></div>
@@ -39,34 +38,7 @@ require_once("init.php");
         <div>
             <div name="feature1" class="subsite"></div>
         </div>
-        <div>
-            <div name="feature2" class="subsite"></div>
-        </div>
-        <div>
-            <div name="feature1" class="subsite"></div>
-        </div>
-        <div>
-            <div name="feature2" class="subsite"></div>
-        </div>
-        <div>
-            <div name="feature1" class="subsite"></div>
-        </div>
-        <div>
-            <div name="feature2" class="subsite"></div>
-        </div>
-
-    <div name="Links" class="container">
-        <div name="feature1" class="subsite"></div>
-        <div name="feature2" class="subsite"></div>
-    </div>
                   
-        <div class="content">
-                <h1>Placeholder</h1>
-                <p>Try <a class="underline">a PHP form</a> to test dynamic input.</p>
-                <p>Try <a class="underline">Subsite</a> to test links</p>
-        </div>
-    
-
     <?php include './template/footer.php'; ?>
 </body>
 </html>
