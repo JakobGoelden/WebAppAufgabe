@@ -14,6 +14,8 @@ $servername = "localhost";
 $username_db   = "root";
 $password_db   = "";
 $dbname     = "users";
+$login_success = false;
+$redirect_url = '';
 //build db connection
 $conn = new mysqli($servername, $username_db, $password_db, $dbname); //new object in sqli class, try's to connect with db
 if ($conn->connect_error) { //did it work?
@@ -119,12 +121,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $stmt_log->close();
 
                         //login successful
-                        session_regenerate_id(true); // new session id to prevent fixation
                         $_SESSION['loggedin'] = true;
                         $_SESSION['username'] = $user['username'];
-                        $_SESSION['is_admin'] = $user['is_admin'];//saves session
-                        header("Location: admin.php"); //login done so redirect to wanted site
-                        exit;
+                        $_SESSION['is_admin'] = $user['is_admin'];
+
+                        $login_success = true;
+                        $success_message = "Erfolgreich eingeloggt! Weiterleitung...";
+                        $redirect_url = ($user['is_admin'] == 1) ? "admin.php" : "index.php";
                     } else {
                         //not successful
                         $error_message = "Falsches Passwort.";
@@ -156,10 +159,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
                     //login with plain pass done
-                    session_regenerate_id(true);
                     $_SESSION['loggedin'] = true;
                     $_SESSION['username'] = $user['username'];
-                    $_SESSION['is_admin'] = $user['is_admin'];//same as above
+                    $_SESSION['is_admin'] = $user['is_admin'];
+
+                    $login_success = true;
+                    $success_message = "Erfolgreich eingeloggt! Weiterleitung...";
+                    $redirect_url = ($user['is_admin'] == 1) ? "admin.php" : "index.php";
 
                     //now create hash
                     $new_hash = password_hash($password_form, PASSWORD_DEFAULT);
@@ -170,9 +176,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $stmt_update->execute();
                     $stmt_update->close();
 
-                    //login done --> redirect
-                    header("Location: admin.php");
-                    exit;
+
 
                 } else {
                     //wrong password but plain
@@ -229,6 +233,8 @@ $action = $_GET['action'] ?? 'login'; // default login page looks for action par
     <p class="success"><?php echo $success_message; ?></p>
 <?php endif; ?>
 
+<div id="message_shown" class="message_hidden">
+</div>
 
 <?php if ($action === 'register'): ?>
 
@@ -269,6 +275,13 @@ $action = $_GET['action'] ?? 'login'; // default login page looks for action par
     <p>Get <a class="underline" href="index.php">back to start</a></p>
 
 <?php endif; ?>
+<script src="functions.js"></script>
 
+<?php if ($login_success): ?>
+    <script>
+        // Aufruf der JS-Funktion mit der korrekten URL aus PHP
+        handleSuccessfulLogin("<?php echo $redirect_url; ?>");
+    </script>
+<?php endif; ?>
 </body>
 </html>
