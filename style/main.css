@@ -80,3 +80,26 @@ body{
   z-index: 1;
   color: white;
 }
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-content: center;
+  row-gap: 50px;
+  column-gap: 100px;
+  margin: 1%;
+}
+
+.container > div {
+  align-items: center;
+  justify-content: center;
+}
+
+.subsite {
+  width: 200px;
+  height: 200px;
+  background-color: gray;
+  border-radius: 15px;
+  box-shadow: 0 0.125em 0.625em rgba(0,0,0,0.2);
+}
