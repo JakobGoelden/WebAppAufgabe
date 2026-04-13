@@ -216,7 +216,7 @@ $action = $_GET['action'] ?? 'login'; // default login page looks for action par
     <link rel="stylesheet" href="./style/main.css">
     <style>
         body { font-family: sans-serif; text-align: center; }
-        form { background: #f4f4f4; border: 1px solid #ccc; padding: 20px; max-width: 400px; margin: 20px auto; }
+        form { background: #f4f4f4; border: 1px solid #ccc; padding: 20px; max-width: 28em; margin: 20px auto; }
         input[type="text"], input[type="password"] { width: 90%; padding: 10px; margin-bottom: 10px; }
         button { background: #337ab7; color: white; padding: 10px 20px; border: none; cursor: pointer; }
         .error { color: red; }
