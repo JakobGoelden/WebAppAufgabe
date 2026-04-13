@@ -1,5 +1,6 @@
 <?php
-require_once("init.php");?>
+require_once("init.php");
+?>
 <p><?php echo $is_logged_in; ?></p>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,6 +9,7 @@ require_once("init.php");?>
     <title>WebApp Projekt</title>
     <link rel="stylesheet" href="./style/main.css">
 </head>
+<script src="functions.js"></script>
 <body>
     <?php include './template/navbar.php'; ?>
 

@@ -3,14 +3,16 @@
 session_start();
 
 //Login double check for entry
-//check if Session-variable 'loggedin' is NOT set or NOT true
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+//check if Session-variable 'loggedin' is NOT set or NOT true (lockerer Check mit !=)
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
 
     //header redirects to login/regist page if Session cookie not set
     header("Location: auth.php");
     exit; //exit script
 }
-if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== 1) {
+
+// Prüfen, ob der User Admin ist (lockerer Check mit != statt !==)
+if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] != 1) {
     // logged in but no Admin
     header("Location: index.php");
     exit;
@@ -18,7 +20,6 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== 1) {
 
 //if statement not triggered --> login was good you can see the page
 ?>
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -43,11 +44,11 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== 1) {
 
 <br>
 <!--redirect to logout pagey -->
-<p><a href="admin_logout.php">Ausloggen</a></p>
+<p><a href="./admin_logout.php">Ausloggen</a></p>
 
 <br>
 <!-- redirect to Homepage session cookies remain-->
-<p><a href="index.php">Angemeldet bleiben und zurück zur Startseite</a></p>
+<p><a href="./index.php">Angemeldet bleiben und zurück zur Startseite</a></p>
 
 </body>
 </html>
