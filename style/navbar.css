@@ -5,11 +5,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: gray;
     color: rgb(255, 255, 255);
     box-shadow: 0 0.125em 0.625em rgba(0,0,0,0.2);
-    border: none;
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
     border-radius: 0.25em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
     padding: 1.25em;
 }
@@ -28,6 +29,7 @@
 }
 
 .nav-button {
+    display: inline-block;
     padding: 0.5em 0.5em;
     background-color: #f0f0f0;
     border: none;
@@ -36,6 +38,8 @@
     font-weight: bold;
     line-height: 1;
     transition: background 0.3s;
+    text-decoration: none;
+    color: #000000;
 }
 
 .nav-button:hover {

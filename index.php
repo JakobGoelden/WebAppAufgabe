@@ -11,11 +11,17 @@ require_once("init.php");?>
 <body>
     <?php include './template/navbar.php'; ?>
 
-    <div name="Titel">
-        <h1>Titel</h1>
+    <div class="cyber-background">
+        <div class="glow-box box-1"></div>
+        <div class="glow-box box-2"></div>
+        <div class="glow-box box-3"></div>
+        <div class="glow-box box-4"></div>
+        <div class="glow-box box-5"></div>
     </div>
 
-    <div name="Links" class="container">
+    <div class="content">
+                <h1>Placeholder</h1>
+                <div name="Links" class="container">
         <div>
             <div name="feature1" class="subsite"></div>
         </div>
@@ -35,6 +41,11 @@ require_once("init.php");?>
             <div name="feature2" class="subsite"></div>
         </div>
     </div>
+
+                <p>Try <a class="underline">a PHP form</a> to test dynamic input.</p>
+                <p>Try <a class="underline">Subsite</a> to test links</p>
+        </div>
+    
 
     <?php include './template/footer.php'; ?>
 </body>
