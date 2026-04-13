@@ -1,7 +1,10 @@
-body{
-  position: relative;
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
   background-color: #0d1117;
-  overflow: hidden;
+  overflow-x: hidden;
 
   background-image: 
     radial-gradient(circle at 85% 15%, rgba(46, 204, 113, 0.15) 0%, transparent 40%),
@@ -11,13 +14,13 @@ body{
     linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
     
   background-size: 
-    100% 100%, 
-    100% 100%, 
-    100% 100%, 
+    100vw 100vh,
+    100vw 100vh, 
+    100vw 100vh, 
     40px 40px, 
     40px 40px;
   background-position: center center;
-
+  background-attachment: fixed;
 }
 
 .glow-box {
@@ -74,7 +77,6 @@ body{
   right: 65%
 }
 
-/* Z-Index für den Content, damit er über dem Raster liegt */
 .content {
   position: relative;
   z-index: 1;
@@ -116,12 +118,10 @@ body{
   font-family: sans-serif;
   z-index: 1000;
   
-
   opacity: 1;
   transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
   transform: translateY(0);
 }
-
 
 .message_hidden {
   opacity: 0;
