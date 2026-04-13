@@ -23,5 +23,5 @@
         <a href="index.php">Subsite4</a>
     </div>
 
-    <a href="login.php" class="nav-button">Login</a>
+    <a href="auth.php" class="nav-button">Login</a>
 </nav>
