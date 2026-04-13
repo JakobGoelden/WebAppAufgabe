@@ -1,13 +1,22 @@
 <?php
-//starts  user session, collects important data
+//starts user session, collects important data
 session_start();
 //errors displayed on site, kill before going live
 ini_set('display_errors', 1);
 //all errors even warnings
 error_reporting(E_ALL);
-//need to fetch real ip
-//include_once "functions.php";
 require_once ("init.php");
+
+// --- NEU: Automatischer Redirect, falls bereits eingeloggt ---
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+    if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
+        header("Location: admin.php");
+        exit;
+    } else {
+        header("Location: user.php");
+        exit;
+    }
+}
 
 //db inputs hardcoded, need to be loaded via ajax in main file soon
 $servername = "localhost";
@@ -124,6 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $_SESSION['loggedin'] = true;
                         $_SESSION['username'] = $user['username'];
                         $_SESSION['is_admin'] = $user['is_admin'];
+                        $_SESSION['user_id']  = $user['id'];
 
                         $login_success = true;
                         $success_message = "Erfolgreich eingeloggt! Weiterleitung...";
@@ -162,6 +172,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $_SESSION['loggedin'] = true;
                     $_SESSION['username'] = $user['username'];
                     $_SESSION['is_admin'] = $user['is_admin'];
+                    $_SESSION['user_id']  = $user['id'];
 
                     $login_success = true;
                     $success_message = "Erfolgreich eingeloggt! Weiterleitung...";
