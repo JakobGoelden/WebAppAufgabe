@@ -1,14 +1,4 @@
-body { /*Nur ein Plazhalter aus spaß dürft ihr weg machen*/
-  background-color: #333;
-  background-image: 
-    linear-gradient(to right, #0f0 1px, transparent 1px),
-    linear-gradient(to bottom, #0f0 1px, transparent 1px);
-  background-size: 5% 5%;
-  color: white;
-}
-
 h1 {
-    background-color: #333;
     width: fit-content;
     margin: 2% auto;
 }
