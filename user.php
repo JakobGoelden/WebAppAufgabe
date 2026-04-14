@@ -109,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet" href="./style/main.css">
     <style>
         body { font-family: sans-serif; padding: 20px; }
-        .dashboard-container { max-width: 800px; margin: 2em auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .dashboard-container { max-width: 800px; margin: 2em auto; background: grey; padding: 30px; border-radius: 0.75em; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         h1 { color: #333; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         .section { margin-top: 30px; border: 1px solid #ddd; padding: 20px; border-radius: 5px; }
         .alert { padding: 10px; margin-bottom: 20px; border-radius: 4px; }

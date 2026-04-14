@@ -34,6 +34,11 @@ if ($conn->connect_error) { //did it work?
 $error_message = '';
 $success_message = '';
 
+// Wenn der User gerade von einer erfolgreichen Registrierung weitergeleitet wurde:
+if (isset($_GET['registered']) && $_GET['registered'] == 1) {
+    $success_message = "Registrierung erfolgreich! Du kannst dich jetzt einloggen.";
+}
+
 //start form handling
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -63,8 +68,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $stmt_insert = $conn->prepare($sql_insert);
                 $stmt_insert->bind_param("ss", $username_form, $password_hash);
 
-                if ($stmt_insert->execute()) { //sends execute order to db
-                    $success_message = "Registrierung erfolgreich! Du kannst dich jetzt einloggen.";
+                if ($stmt_insert->execute()) { 
+                    // Erfolgreich! Wir leiten auf die Login-Seite um und hängen ein "?registered=1" an die URL
+                    header("Location: auth.php?action=login&registered=1");
+                    exit;
                 } else {
                     $error_message = "Fehler bei der Registrierung: " . $conn->error;
                 }
@@ -137,7 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                         $login_success = true;
                         $success_message = "Erfolgreich eingeloggt! Weiterleitung...";
-                        $redirect_url = ($user['is_admin'] == 1) ? "admin.php" : "index.php";
+                        $redirect_url = ($user['is_admin'] == 1) ? "admin.php" : "user.php";
                     } else {
                         //not successful
                         $error_message = "Falsches Passwort.";
@@ -176,7 +183,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                     $login_success = true;
                     $success_message = "Erfolgreich eingeloggt! Weiterleitung...";
-                    $redirect_url = ($user['is_admin'] == 1) ? "admin.php" : "index.php";
+                    $redirect_url = ($user['is_admin'] == 1) ? "admin.php" : "user.php";
 
                     //now create hash
                     $new_hash = password_hash($password_form, PASSWORD_DEFAULT);
@@ -227,7 +234,7 @@ $action = $_GET['action'] ?? 'login'; // default login page looks for action par
     <link rel="stylesheet" href="./style/main.css">
     <style>
         body { font-family: sans-serif; text-align: center; }
-        form { background: #f4f4f4; border: 1px solid #ccc; padding: 20px; max-width: 28em; margin: 20px auto; }
+        form { background: grey; border-radius: 0.75em;; padding: 20px; max-width: 28em; margin: 20px auto; }
         input[type="text"], input[type="password"] { width: 90%; padding: 10px; margin-bottom: 10px; }
         button { background: #337ab7; color: white; padding: 10px 20px; border: none; cursor: pointer; }
         .error { color: red; }
