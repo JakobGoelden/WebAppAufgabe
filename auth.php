@@ -264,6 +264,7 @@ $action = $_GET['action'] ?? 'login'; // default login page looks for action par
         <div class="toggle-link">
             Hast du schon einen Account? <a href="auth.php?action=login">Hier einloggen</a>
         </div>
+        <p>Get <a class="underline" href="index.php">back to start</a></p>
     </form>
 
 <?php else: ?>
@@ -282,8 +283,9 @@ $action = $_GET['action'] ?? 'login'; // default login page looks for action par
         <div class="toggle-link">
             Noch kein Account? <a href="auth.php?action=register">Hier registrieren</a>
         </div>
+        <p>Get <a class="underline" href="index.php">back to start</a></p>
     </form>
-    <p>Get <a class="underline" href="index.php">back to start</a></p>
+    
 
 <?php endif; ?>
 <script src="functions.js"></script>
