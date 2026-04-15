@@ -3,7 +3,7 @@
 ## Quick Git Guide: Feature Branches, Rebase & Merge
 
 ### Create a Feature Branch
-1.  Update main: `git checkout main && git pull`
+1.  Update main: `sudo git checkout main && git pull`
 2.  Create & switch: `git checkout -b <feature>`
 3.  Make changes, then commit: `git add . && git commit -m "Add feature"`
 
