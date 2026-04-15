@@ -7,6 +7,7 @@
 
 body {
   background-color: #0d1117;
+  color: #ddd;
   overflow-x: hidden;
 
   background-image: 
@@ -22,7 +23,7 @@ body {
     100vw 100vh, 
     40px 40px, 
     40px 40px;
-  /*background-position: center center;*/
+
   background-attachment: fixed;
   font-family: "Quantico", sans-serif;
 }
@@ -89,7 +90,6 @@ body {
 .content {
   position: relative;
   z-index: 1;
-  color: white;
 }
 
 .container {

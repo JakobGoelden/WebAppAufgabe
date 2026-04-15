@@ -16,14 +16,14 @@
 }
 
 .nav-left a {
-    color: white;
+    color: #ddd;
     text-decoration: none;
     font-size: 1.2em;
     font-weight: bold;
 }   
 
-.nav-subsite a {    
-    color: white;
+.nav-subsite a {  
+    color: #ddd;  
     text-decoration: none;
     font-size: 1em;
 }
