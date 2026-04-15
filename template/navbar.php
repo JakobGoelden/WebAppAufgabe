@@ -25,3 +25,11 @@
 
     <a href="auth.php" class="nav-button">Login</a>
 </nav>
+
+    <div class="cyber-background">
+        <div class="glow-box box-1"></div>
+        <div class="glow-box box-2"></div>
+        <div class="glow-box box-3"></div>
+        <div class="glow-box box-4"></div>
+        <div class="glow-box box-5"></div>
+    </div>
