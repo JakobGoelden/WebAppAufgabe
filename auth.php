@@ -6,8 +6,9 @@ ini_set('display_errors', 1);
 //all errors even warnings
 error_reporting(E_ALL);
 require_once ("init.php");
+require_once ("functions.php");
 
-// --- NEU: Automatischer Redirect, falls bereits eingeloggt ---
+// --- Automatischer Redirect, falls bereits eingeloggt ---
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
         header("Location: admin.php");
@@ -127,8 +128,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         // start login logging
                         // if login good, log the successful attempt
                         $status = 1;
-                        // $ip_address = get_secure_ip(); //get ip from user
-                        $ip_address = "127.0.0.1"; // dummy ip
+                        $ip_address = get_secure_ip(); //get ip from user
+                        //$ip_address = "127.0.0.1"; // dummy ip
                         $user_id = $user['id']; // get user id from db
                         $sql_log = "INSERT INTO login_logs (user_id, ip_address, success) VALUES (?, ?, ?)"; //log data
                         $stmt_log = $conn->prepare($sql_log);
@@ -150,8 +151,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $error_message = "Falsches Passwort.";
                         //log failed login attempt
                         $status = 0;
-                        // $ip_address = get_secure_ip();
-                        $ip_address = "127.0.0.1"; // dummy ip
+                        $ip_address = get_secure_ip();
+                        //$ip_address = "127.0.0.1"; // dummy ip
                         $user_id = $user['id'];
                         $sql_log = "INSERT INTO login_logs (user_id, ip_address, success) VALUES (?, ?, ?)";
                         $stmt_log = $conn->prepare($sql_log);
@@ -165,8 +166,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     // start login logging
                     //same as first logging, just with clear text psswd.
                     $status = 1;
-                    // $ip_address = get_secure_ip();
-                    $ip_address = "127.0.0.1"; // dummy ip
+                    $ip_address = get_secure_ip();
+                    //$ip_address = "127.0.0.1"; // dummy ip
                     $user_id = $user['id'];
                     $sql_log = "INSERT INTO login_logs (user_id, ip_address,success) VALUES (?, ?, ?)";
                     $stmt_log = $conn->prepare($sql_log);
@@ -200,8 +201,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     //wrong password but plain
                     $error_message = "Falsches Passwort.";
                     $status = 0; //log failed attempt
-                    // $ip_address = get_secure_ip();
-                    $ip_address = "127.0.0.1"; // dummy ip
+                    $ip_address = get_secure_ip();
+                    //$ip_address = "127.0.0.1"; // dummy ip
                     $user_id = $user['id'];
                     $sql_log = "INSERT INTO login_logs (user_id, ip_address, success) VALUES (?, ?, ?)";
                     $stmt_log = $conn->prepare($sql_log);
