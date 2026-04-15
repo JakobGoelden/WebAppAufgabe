@@ -1,26 +1,28 @@
 <?php
 require_once("init.php");
 ?>
+
 <p><?php echo $is_logged_in; ?></p>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>WebApp Projekt</title>
     <link rel="stylesheet" href="./style/main.css">
 </head>
+
 <script src="functions.js"></script>
+
 <body>
     <?php include './template/navbar.php'; ?>
 
-    
-
     <div class="content">
+
         <h1>Lorem ipsum dolor sit amet</h1>
         <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.</h2>
         
-        
-
         <div name="Links" class="container">
             <div>
                 <div name="feature1" class="subsite"></div>
