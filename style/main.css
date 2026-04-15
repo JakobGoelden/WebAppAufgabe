@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -21,6 +24,7 @@ body {
     40px 40px;
   background-position: center center;
   background-attachment: fixed;
+  font-family: "Quantico", sans-serif;
 }
 
 .glow-box {
@@ -52,7 +56,7 @@ body {
 .box-3 {
   width: 30px;
   height: 30px;
-  top: 80%;
+  top: 72%;
   right: 30%;
   transform: rotate(300deg);
   border-color: rgba(74, 222, 128, 0.8);
@@ -71,9 +75,9 @@ body {
 }
 
 .box-5 {
-  width: 15px;
-  height: 15px;
-  top: 65%;
+  width: 20px;
+  height: 20px;
+  top: 66.5%;
   right: 65%
 }
 
@@ -99,11 +103,17 @@ body {
 }
 
 .subsite {
-  width: 200px;
+  width: 500px;
   height: 200px;
-  background-color: gray;
+  /*background-color: gray;*/
   border-radius: 15px;
+  /*box-shadow: 0 0.125em 0.625em rgba(0,0,0,0.2);*/
+  color: rgb(255, 255, 255);
   box-shadow: 0 0.125em 0.625em rgba(0,0,0,0.2);
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border-radius: 0.25em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .message_shown {
@@ -127,4 +137,20 @@ body {
   opacity: 0;
   transform: translateY(20px);
   pointer-events: none; 
+}
+
+h1 {
+  font-size: 350%;
+  text-align: center;
+  font-family: "Audiowide", sans-serif;
+  font-weight: 450;
+  font-style: normal;
+  margin-bottom: 0%;
+}
+
+h2 {
+  text-align: center;
+  font-family: "Quantico", sans-serif;
+  font-style: normal;
+  padding: 2%;
 }
