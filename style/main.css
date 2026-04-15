@@ -22,7 +22,7 @@ body {
     100vw 100vh, 
     40px 40px, 
     40px 40px;
-  background-position: center center;
+  /*background-position: center center;*/
   background-attachment: fixed;
   font-family: "Quantico", sans-serif;
 }
@@ -43,6 +43,7 @@ body {
   top: 25%;
   left: 8%;
   transform: rotate(-5deg);
+  position: fixed;
 }
 
 .box-2 {
@@ -51,6 +52,7 @@ body {
   top: 10%;
   left: 45%;
   border-width: 1px;
+  position: fixed;
 }
 
 .box-3 {
@@ -62,6 +64,7 @@ body {
   border-color: rgba(74, 222, 128, 0.8);
   box-shadow: 0 0 30px rgba(74, 222, 128, 0.5);
   opacity: 50%;
+  position: fixed;
 }
 
 .box-4 {
@@ -72,13 +75,15 @@ body {
   transform: rotate(10deg);
   border-color: rgba(74, 222, 128, 0.8);
   box-shadow: 0 0 15px rgba(74, 222, 128, 0.5);
+  position: fixed;
 }
 
 .box-5 {
   width: 20px;
   height: 20px;
   top: 66.5%;
-  right: 65%
+  right: 65%;
+  position: fixed;
 }
 
 .content {
