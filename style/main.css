@@ -26,7 +26,21 @@ body {
 
   background-attachment: fixed;
   font-family: "Quantico", sans-serif;
+
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
 }
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+html, body {
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* IE/old Edge */
+}
+
 
 .glow-box {
   position: absolute;
