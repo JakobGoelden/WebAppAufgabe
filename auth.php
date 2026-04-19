@@ -1,19 +1,31 @@
 <?php
-//starts  user session, collects important data
+//starts user session, collects important data
 session_start();
 //errors displayed on site, kill before going live
 ini_set('display_errors', 1);
 //all errors even warnings
 error_reporting(E_ALL);
-//need to fetch real ip
-//include_once "functions.php";
 require_once ("init.php");
+require_once ("functions.php");
+
+// --- Automatischer Redirect, falls bereits eingeloggt ---
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+    if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
+        header("Location: admin.php");
+        exit;
+    } else {
+        header("Location: user.php");
+        exit;
+    }
+}
 
 //db inputs hardcoded, need to be loaded via ajax in main file soon
 $servername = "localhost";
 $username_db   = "root";
 $password_db   = "";
 $dbname     = "users";
+$login_success = false;
+$redirect_url = '';
 //build db connection
 $conn = new mysqli($servername, $username_db, $password_db, $dbname); //new object in sqli class, try's to connect with db
 if ($conn->connect_error) { //did it work?
@@ -22,6 +34,11 @@ if ($conn->connect_error) { //did it work?
 //initialize for later
 $error_message = '';
 $success_message = '';
+
+// Wenn der User gerade von einer erfolgreichen Registrierung weitergeleitet wurde:
+if (isset($_GET['registered']) && $_GET['registered'] == 1) {
+    $success_message = "Registrierung erfolgreich! Du kannst dich jetzt einloggen.";
+}
 
 //start form handling
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -52,8 +69,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $stmt_insert = $conn->prepare($sql_insert);
                 $stmt_insert->bind_param("ss", $username_form, $password_hash);
 
-                if ($stmt_insert->execute()) { //sends execute order to db
-                    $success_message = "Registrierung erfolgreich! Du kannst dich jetzt einloggen.";
+                if ($stmt_insert->execute()) { 
+                    // Erfolgreich! Wir leiten auf die Login-Seite um und hängen ein "?registered=1" an die URL
+                    header("Location: auth.php?action=login&registered=1");
+                    exit;
                 } else {
                     $error_message = "Fehler bei der Registrierung: " . $conn->error;
                 }
@@ -109,8 +128,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         // start login logging
                         // if login good, log the successful attempt
                         $status = 1;
-                        // $ip_address = get_secure_ip(); //get ip from user
-                        $ip_address = "127.0.0.1"; // dummy ip
+                        $ip_address = get_secure_ip(); //get ip from user
+                        //$ip_address = "127.0.0.1"; // dummy ip
                         $user_id = $user['id']; // get user id from db
                         $sql_log = "INSERT INTO login_logs (user_id, ip_address, success) VALUES (?, ?, ?)"; //log data
                         $stmt_log = $conn->prepare($sql_log);
@@ -119,19 +138,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $stmt_log->close();
 
                         //login successful
-                        session_regenerate_id(true); // new session id to prevent fixation
                         $_SESSION['loggedin'] = true;
                         $_SESSION['username'] = $user['username'];
-                        $_SESSION['is_admin'] = $user['is_admin'];//saves session
-                        header("Location: admin.php"); //login done so redirect to wanted site
-                        exit;
+                        $_SESSION['is_admin'] = $user['is_admin'];
+                        $_SESSION['user_id']  = $user['id'];
+
+                        $login_success = true;
+                        $success_message = "Erfolgreich eingeloggt! Weiterleitung...";
+                        $redirect_url = ($user['is_admin'] == 1) ? "admin.php" : "user.php";
                     } else {
                         //not successful
                         $error_message = "Falsches Passwort.";
                         //log failed login attempt
                         $status = 0;
-                        // $ip_address = get_secure_ip();
-                        $ip_address = "127.0.0.1"; // dummy ip
+                        $ip_address = get_secure_ip();
+                        //$ip_address = "127.0.0.1"; // dummy ip
                         $user_id = $user['id'];
                         $sql_log = "INSERT INTO login_logs (user_id, ip_address, success) VALUES (?, ?, ?)";
                         $stmt_log = $conn->prepare($sql_log);
@@ -145,8 +166,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     // start login logging
                     //same as first logging, just with clear text psswd.
                     $status = 1;
-                    // $ip_address = get_secure_ip();
-                    $ip_address = "127.0.0.1"; // dummy ip
+                    $ip_address = get_secure_ip();
+                    //$ip_address = "127.0.0.1"; // dummy ip
                     $user_id = $user['id'];
                     $sql_log = "INSERT INTO login_logs (user_id, ip_address,success) VALUES (?, ?, ?)";
                     $stmt_log = $conn->prepare($sql_log);
@@ -156,10 +177,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
                     //login with plain pass done
-                    session_regenerate_id(true);
                     $_SESSION['loggedin'] = true;
                     $_SESSION['username'] = $user['username'];
-                    $_SESSION['is_admin'] = $user['is_admin'];//same as above
+                    $_SESSION['is_admin'] = $user['is_admin'];
+                    $_SESSION['user_id']  = $user['id'];
+
+                    $login_success = true;
+                    $success_message = "Erfolgreich eingeloggt! Weiterleitung...";
+                    $redirect_url = ($user['is_admin'] == 1) ? "admin.php" : "user.php";
 
                     //now create hash
                     $new_hash = password_hash($password_form, PASSWORD_DEFAULT);
@@ -170,16 +195,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $stmt_update->execute();
                     $stmt_update->close();
 
-                    //login done --> redirect
-                    header("Location: admin.php");
-                    exit;
+
 
                 } else {
                     //wrong password but plain
                     $error_message = "Falsches Passwort.";
                     $status = 0; //log failed attempt
-                    // $ip_address = get_secure_ip();
-                    $ip_address = "127.0.0.1"; // dummy ip
+                    $ip_address = get_secure_ip();
+                    //$ip_address = "127.0.0.1"; // dummy ip
                     $user_id = $user['id'];
                     $sql_log = "INSERT INTO login_logs (user_id, ip_address, success) VALUES (?, ?, ?)";
                     $stmt_log = $conn->prepare($sql_log);
@@ -211,8 +234,8 @@ $action = $_GET['action'] ?? 'login'; // default login page looks for action par
     <title>Login</title>
     <link rel="stylesheet" href="./style/main.css">
     <style>
-        body { font-family: sans-serif; text-align: center; }
-        form { background: #f4f4f4; border: 1px solid #ccc; padding: 20px; max-width: 400px; margin: 20px auto; }
+        body { text-align: center; }
+        form { background: grey; border-radius: 0.75em;; padding: 20px; max-width: 28em; margin: 20px auto; }
         input[type="text"], input[type="password"] { width: 90%; padding: 10px; margin-bottom: 10px; }
         button { background: #337ab7; color: white; padding: 10px 20px; border: none; cursor: pointer; }
         .error { color: red; }
@@ -229,6 +252,8 @@ $action = $_GET['action'] ?? 'login'; // default login page looks for action par
     <p class="success"><?php echo $success_message; ?></p>
 <?php endif; ?>
 
+<div id="message_shown" class="message_hidden">
+</div>
 
 <?php if ($action === 'register'): ?>
 
@@ -247,6 +272,7 @@ $action = $_GET['action'] ?? 'login'; // default login page looks for action par
         <div class="toggle-link">
             Hast du schon einen Account? <a href="auth.php?action=login">Hier einloggen</a>
         </div>
+        <p>Get <a class="underline" href="index.php">back to start</a></p>
     </form>
 
 <?php else: ?>
@@ -265,10 +291,18 @@ $action = $_GET['action'] ?? 'login'; // default login page looks for action par
         <div class="toggle-link">
             Noch kein Account? <a href="auth.php?action=register">Hier registrieren</a>
         </div>
+        <p>Get <a class="underline" href="index.php">back to start</a></p>
     </form>
-    <p>Get <a class="underline" href="index.php">back to start</a></p>
+    
 
 <?php endif; ?>
+<script src="functions.js"></script>
 
+<?php if ($login_success): ?>
+    <script>
+        // Aufruf der JS-Funktion mit der korrekten URL aus PHP
+        handleSuccessfulLogin("<?php echo $redirect_url; ?>");
+    </script>
+<?php endif; ?>
 </body>
 </html>

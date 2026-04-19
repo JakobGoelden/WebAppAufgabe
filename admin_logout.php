@@ -10,6 +10,6 @@ session_unset();
 session_destroy();
 
 //redirect to login page
-header("Location: auth.php");
+header("Location: index.php");
 exit;
 ?>
