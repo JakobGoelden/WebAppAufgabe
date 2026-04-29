@@ -14,3 +14,11 @@ function handleSuccessfulLogin(targetUrl) {
 
   }, 3000); // 3 Sekunden warten
 }
+setTimeout(function() {
+    document.getElementById('p').style.display = 'block'; // Zeige Warnbalken
+
+    setTimeout(function() {
+        window.location.href = 'admin_logout.php'; // Logout nach Y Sekunden
+    }, 30000); // 30 Sekunden
+    
+}, 60000); // 10 Minuten (600.000 ms)
