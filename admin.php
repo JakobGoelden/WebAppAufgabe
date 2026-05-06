@@ -3,7 +3,7 @@
 session_start();
 
 //Login double check for entry
-//check if Session-variable 'loggedin' is NOT set or NOT true (lockerer Check mit !=)
+
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
 
     //header redirects to login/regist page if Session cookie not set
