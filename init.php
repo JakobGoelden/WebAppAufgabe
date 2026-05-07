@@ -1,13 +1,31 @@
 <?php
-// init.php - Wird auf jeder Seite ganz oben eingebunden
 
-// Session starten, falls noch nicht passiert
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+
+session_set_cookie_params(0);
+
+// Session starten (falls noch nicht passiert)
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Zentrale Variablen definieren
-$is_logged_in = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
-$is_admin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == true;
-$username = $is_logged_in ? $_SESSION['username'] : null;
+$timeout_duration = 1800; 
 
+
+if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > $timeout_duration) {
+    
+    session_unset();    
+    session_destroy();   
+
+    header("Location: auth.php"); 
+    exit;
+}
+
+
+$_SESSION['last_activity'] = time();
+
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}

@@ -1,5 +1,5 @@
 <?php
-
+require_once("init.php");
 ?>
 
 <!-- Ersetze deinen fehlerhaften link-Tag durch diesen: -->
@@ -12,7 +12,7 @@
 <script>
     $(function() {
       // Testzeiten (X = Zeit bis Dialog, Y = Zeit im Dialog bis Kick)
-      const X_MIN = 0.1 * 60 * 1000; 
+      const X_MIN = 15 * 60 * 1000; 
       const Y_SEK = 30 * 1000;      
 
       $("#dialog").dialog({

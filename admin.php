@@ -1,7 +1,5 @@
 <?php
-//start session to load session cookies
-session_start();
-
+require_once("init.php");
 //Login double check for entry
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {

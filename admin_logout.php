@@ -1,7 +1,5 @@
 <?php
-//need to start session to handle cookies
-session_start();
-
+require_once("init.php");
 //delete session variables
 // $_SESSION = array(); could be used too
 session_unset();
