@@ -1,12 +1,12 @@
 <?php
-session_start();
+require_once("init.php");
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
     header("Location: auth.php");
     exit;
 }
 
-require_once("init.php");
+
 $servername = "localhost";
 $username_db = "root";
 $password_db = "";
