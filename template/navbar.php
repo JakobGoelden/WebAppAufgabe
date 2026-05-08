@@ -8,7 +8,7 @@
     </div>
 
     <div class="nav-subsite">
-        <a href="metadata_stripping.php">Metadaten entfernen</a>
+        <a href="../include/metadata_stripping.php">Metadaten entfernen</a>
     </div>
 
     <div class="nav-subsite">
