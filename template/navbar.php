@@ -8,7 +8,7 @@
     </div>
 
     <div class="nav-subsite">
-        <a href="index.php">Subsite1</a>
+        <a href="metadata_stripping.php">Metadaten entfernen</a>
     </div>
 
     <div class="nav-subsite">
