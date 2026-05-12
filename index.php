@@ -24,7 +24,7 @@ require_once("init.php");
         
         <div name="Links" class="container">
             <div>
-                <div name="Metadata" class="subsite" href="/include/metadata_stripping/metadata_stripping.php"></div>
+                <div name="Metadata" class="subsite"></div>
             </div>
             <div>
                 <div name="feature2" class="subsite"></div>
