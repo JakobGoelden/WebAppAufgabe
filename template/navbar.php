@@ -22,7 +22,7 @@
     <div class="nav-subsite">
         <a href="index.php">Subsite4</a>
     </div>
-
+    <!-- different mode if logged in or logged out -->
     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
         <a href="auth.php" class="nav-button">Mein Bereich</a>
     <?php else: ?>

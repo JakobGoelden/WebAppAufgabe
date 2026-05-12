@@ -2,7 +2,7 @@
 require_once("init.php");
 ?>
 
-<!-- Ersetze deinen fehlerhaften link-Tag durch diesen: -->
+<!-- load jquery and jquery ui for the timeout dialog -->
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.2/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="https://code.jquery.com/ui/1.14.2/jquery-ui.js"></script>
@@ -11,7 +11,7 @@ require_once("init.php");
 <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
 <script>
     $(function() {
-      // Testzeiten (X = Zeit bis Dialog, Y = Zeit im Dialog bis Kick)
+      // times. x = time until warning, y = time until auto logout
       const X_MIN = 15 * 60 * 1000; 
       const Y_SEK = 30 * 1000;      
 
@@ -21,11 +21,11 @@ require_once("init.php");
           appendTo: "body",
           closeOnEscape: false,
           open: function() {
-              console.log("Dialog geöffnet. Logout-Timer läuft...");
+              console.log("dialog opened. logout timer running...");
               
-              // Wichtig: Timer auf einer globalen oder klar definierten Variable
+              // store timer globally to clear it later
               window.logoutTimer = setTimeout(function() {
-                  console.log("Zeit abgelaufen! Logout wird ausgeführt...");
+                  console.log("time's up. executing logout...");
                   window.location.assign('admin_logout.php'); 
               }, Y_SEK);
           },
@@ -33,24 +33,24 @@ require_once("init.php");
               {
                   text: "Ich bin noch da",
                   click: function() {
-                      console.log("User ist noch da. Reset...");
+                      console.log("user is active. resetting...");
                       clearTimeout(window.logoutTimer);
                       $(this).dialog("close");
-                      // Nutze href = href statt reload, um sicherzugehen, dass es ein GET-Request ist
+                      // use href to force get request instead of reload
                       window.location.href = window.location.pathname; 
                   }
               },
               {
                   text: "Logout",
                   click: function() {
-                      console.log("Manueller Logout geklickt.");
+                      console.log("manual logout clicked.");
                       window.location.assign('admin_logout.php');
                   }
               }
           ]
       });
 
-      // Start-Verzögerung
+      // trigger dialog after x_min
       setTimeout(function() {
           $("#dialog").dialog("open");
       }, X_MIN);
@@ -58,4 +58,3 @@ require_once("init.php");
 
 </script>
 <?php endif; ?>
-

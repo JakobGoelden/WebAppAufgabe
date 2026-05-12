@@ -1,13 +1,13 @@
 <?php
-// Fehleranzeige ganz nach oben!
+// error display. kill before going live
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// Hier passiert die Magie: Session wird gestartet UND CSRF-Token erstellt
+// init session and generate csrf token
 require_once ("init.php");
 require_once ("functions.php");
 
-// --- Automatischer Redirect, falls bereits eingeloggt (Für den direkten Seitenaufruf) ---
+// auto redirect if already logged in
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
         header("Location: admin.php");
@@ -18,7 +18,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     }
 }
 
-// db inputs hardcoded
+// db inputs hardcoded. will be moved at the end
 $servername = "localhost";
 $username_db   = "root";
 $password_db   = "";
@@ -37,7 +37,7 @@ if ($conn->connect_error) {
 $error_message = '';
 $success_message = '';
 
-// Wenn der User gerade von einer erfolgreichen Registrierung weitergeleitet wurde:
+// show success msg if redirected from registration
 if (isset($_GET['registered']) && $_GET['registered'] == 1) {
     $success_message = "Registrierung erfolgreich! Du kannst dich jetzt einloggen.";
 }
@@ -45,16 +45,18 @@ if (isset($_GET['registered']) && $_GET['registered'] == 1) {
 // start form handling
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
+    // security check: validate csrf token to stop cross-site request forgery. 
+    // using hash_equals to prevent timing attacks.
     if (!isset($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
         die("Sicherheitsfehler: Ungültiger CSRF-Token. Bitte lade die Seite neu und versuche es erneut.");
     }
 
-    // --- REGISTRIERUNG ---
+    // registration starts here
     if (isset($_POST['register'])) {
         $username_form = $_POST['username'] ?? '';
         $password_form = $_POST['password'] ?? '';
 
-        // Rate Limiting für Registrierung
+        // rate limiting per ip. max 3 per day against spam bots. fast sql check.
         $ip_address = get_secure_ip();
         $max_regs_per_day = 3; 
         
@@ -72,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $error_message = "Benutzername und Passwort sind erforderlich.";
         } 
         else {
-            // Prüfen, ob Benutzer bereits existiert
+            // does user exist already?
             $sql = "SELECT id FROM user WHERE username = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("s", $username_form);
@@ -82,13 +84,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             if ($result->num_rows > 0) {
                 $error_message = "Dieser Benutzername ist bereits vergeben.";
             } else {
+                // hash password before storing
                 $password_hash = password_hash($password_form, PASSWORD_DEFAULT);
                 $sql_insert = "INSERT INTO user (username, password) VALUES (?, ?)";
                 $stmt_insert = $conn->prepare($sql_insert);
                 $stmt_insert->bind_param("ss", $username_form, $password_hash);
 
                 if ($stmt_insert->execute()) { 
-                    // Erfolgreiche Registrierung loggen (für Rate Limiting)
+                    // log positive registration for rate limiting
                     $sql_reg_log = "INSERT INTO register_logs (ip_address) VALUES (?)";
                     $stmt_reg_log = $conn->prepare($sql_reg_log);
                     $stmt_reg_log->bind_param("s", $ip_address);
@@ -105,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $stmt->close();
         }
 
-    // --- LOGIN ---
+    // login starts here
     } elseif (isset($_POST['login'])) {
 
         $username_form = $_POST['username'] ?? '';
@@ -125,9 +128,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $hash_from_db = $user['password'];
                 $user_id = $user['id'];
 
-                //brute force lock
+                // brute force lock. blocks account for 15 mins after 5 failed tries. saves server load.
                 $max_attempts = 5;
-                $lockout_time = 15; // Minuten
+                $lockout_time = 15; 
                 
                 $sql_brute = "SELECT COUNT(*) as attempts FROM login_logs 
                               WHERE user_id = ? AND success = 0 
@@ -141,7 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 if ($brute_result['attempts'] >= $max_attempts) {
                     $error_message = "Zu viele Fehlversuche. Dein Account ist für $lockout_time Minuten gesperrt.";
                 } else {
-                    // --- PASSWORT PRÜFUNG ---
+                    // check password. verifies bcrypt hash or silently upgrades legacy plaintext passwords to bcrypt.
                     $login_allowed = false;
 
                     if (password_get_info($hash_from_db)['algoName'] !== 'unknown') {
@@ -159,7 +162,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $stmt_update->close();
                     }
 
-                    // --- LOGGING ---
+                    // push attempt to log
                     $status = $login_allowed ? 1 : 0;
                     $ip_address = get_secure_ip();
                     
@@ -170,13 +173,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $stmt_log->close();
 
                     if ($login_allowed) {
-                        // Session befüllen
+                        // fill session data
                         $_SESSION['loggedin'] = true;
                         $_SESSION['username'] = $user['username'];
                         $_SESSION['is_admin'] = $user['is_admin'];
                         $_SESSION['user_id']  = $user_id;
 
-                        // WICHTIG: Hier nutzen wir wieder dein JavaScript für den Redirect!
+                        // prep data for js redirect
                         $login_success = true;
                         $success_message = "Erfolgreich eingeloggt! Weiterleitung...";
                         $redirect_url = ($user['is_admin'] == 1) ? "admin.php" : "user.php";
@@ -230,7 +233,7 @@ $action = $_GET['action'] ?? 'login';
 <?php if ($action === 'register'): ?>
 
     <form action="auth.php?action=register" method="POST">
-        <!-- CSRF Hidden Input -->
+        <!-- hidden csrf input -->
         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
         
         <h1>Registrieren</h1>
@@ -253,7 +256,7 @@ $action = $_GET['action'] ?? 'login';
 <?php else: ?>
 
     <form action="auth.php?action=login" method="POST">
-
+        <!-- hidden csrf input -->
         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
         
         <h1>Login</h1>
@@ -278,7 +281,7 @@ $action = $_GET['action'] ?? 'login';
 
 <?php if ($login_success): ?>
     <script>
-        // Aufruf der JS-Funktion mit der korrekten URL aus PHP
+        // trigger js redirect 
         handleSuccessfulLogin("<?php echo $redirect_url; ?>");
     </script>
 <?php endif; ?>
