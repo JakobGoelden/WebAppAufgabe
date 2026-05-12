@@ -5,7 +5,7 @@ function handleSuccessfulLogin(targetUrl) {
   message_shown.classList.remove('message_hidden');
     
     setTimeout(() => {
-      window.location.href = targetUrl; // Hier wird die Ziel-URL genutzt
-    }, 200); // Wartet noch mal 0,2 Sekunden auf die Animation
+      window.location.href = targetUrl; 
+    }, 200); // wait for 0.2 secs for animation
 
   }

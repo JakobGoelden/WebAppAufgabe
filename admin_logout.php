@@ -1,7 +1,6 @@
 <?php
 require_once("init.php");
 //delete session variables
-// $_SESSION = array(); could be used too
 session_unset();
 
 //kill session and declare faulty session cookie (or delete) in browser
