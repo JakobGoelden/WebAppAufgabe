@@ -124,7 +124,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
     <meta charset="UTF-8">
     <title>Metadaten entfernen</title>
     <link rel="stylesheet" href="../../style/main.css">
-    <link rel="stylesheet" href="../../style/metadata_stripping.css"
+    <link rel="stylesheet" href="../../style/metadata_stripping.css">
+    <link rel="stylesheet" href="../../style/navbar.css"
 </head>
 <body>
     <?php include '../../template/navbar.php'; ?>
