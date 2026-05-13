@@ -11,7 +11,8 @@ function sendApiRequest($url) {
     curl_close($ch);
     return ['code' => $httpCode, 'data' => $response];
 }
-
+#cUrl int() startet die session 
+#-> 
 #ich nutzte cUrl  $ch um Daten von einer anderen Website aubzurufen 
 # CURLOPT_RETURNTRANSFER sorgt für speicherung als string 
 # timeut verhindert das die Seite einfriert, falls api request langsamer ist 
@@ -39,9 +40,11 @@ function checkPasswordLeak($password) {
     return "Check läuft...";
 
     #passwort wird gehashed 
+    #passwort wird nur gehashed als api call geschickt
     # dann werden die gelakten Password, welche mit dem Hash angefangen zurückgegbeben , nur die ersten 5 zeichen werden genommen 
     # respone ist dann die liste mit den suffixen #
     # lokal wird dann mit strpos($result) verglichen 
+    # substr extrahiert ein teil string aus meinem url , nur bis position 5 
 
 
 }
@@ -63,6 +66,7 @@ if (isset($_POST['password'])) {
         $special = preg_match('/[@$!%*?&]/', $userInput);
 
       #jeder Operator speichert true oder false und wird dann verglichen 
+      # dynamisches bearbeiten der eingabe 
         $allCriteriaMet = ($length && $upper && $lower && $number && $special);
 
         $cGreen = "#4CAF50";

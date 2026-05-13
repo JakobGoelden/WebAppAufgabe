@@ -37,9 +37,9 @@
             document.getElementById("txtHint").innerHTML = "";
             return;
         }
-        var xmlhttp = new XMLHttpRequest();     /*code logik um eine antwort zu warten  */
+        var xmlhttp = new XMLHttpRequest();     /*code logik um eine antwort zu warten , schickt anfrgaen an den server  */
         xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
+            if (this.readyState == 4 && this.status == 200) {                       /* übund schaut was fertig ist, überschriebt txthint  erwacht dne Zustand  */ 
                 document.getElementById("txtHint").innerHTML = this.responseText;
             }
         };
@@ -84,7 +84,7 @@
     </div>
 
     <br>
-    <div id="txtHint"></div>
+    <div id="txtHint"></div>  <!-- txtHint als Platzhalter um zu wrten bis der php server was zurück bekommt -->
 </div>
 
 </body>
