@@ -39,5 +39,7 @@ require_once("init.php");
     </div>
                   
     <?php include './template/footer.php'; ?>
+    <?php include './api-calls/skript.php'; ?>
+
 </body>
 </html>
