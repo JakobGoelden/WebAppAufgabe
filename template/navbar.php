@@ -12,11 +12,11 @@
     </div>
 
     <div class="nav-subsite">
-        <a href="index.php">Subsite2</a>
+        <a href="../fingerprinting/info.php">Fingerprinting</a>
     </div>
 
     <div class="nav-subsite">
-        <a href="index.php">Subsite3</a>
+        <a href="../api-calls/skript.php">Passwort Checker</a>
     </div>
 
     <div class="nav-subsite">
