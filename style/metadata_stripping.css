@@ -1,0 +1,79 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: sans-serif;
+    background-color: #121212;
+    color: white;
+}
+
+input, button, .btn {
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 0.25em;
+    cursor: pointer;
+    font-weight: bold;
+    color: #000;
+    padding: 0.6em 1.2em;
+    text-decoration: none;
+    transition: background 0.3s;
+    display: inline-block;
+}
+
+.form-container {
+    display: flex;
+    gap: 1em;
+    margin-top: 1em;
+    justify-content: center;
+}
+
+.preview-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+    width: 90%;
+    max-width: 800px;
+}
+
+.preview-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #444;
+    padding: 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    width: fit-content;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    max-height: 500px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.btn-download {
+    background: #007bff;
+    color: white;
+    width: 100%;
+}
+
+.json-box {
+    background: #1e1e1e;
+    color: #00ff00;
+    padding: 15px;
+    margin-top: 5px;
+    border-radius: 5px;
+    font-family: monospace;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #333;
+    text-align: left;
+    width: 800px;
+    box-sizing: border-box;
+}

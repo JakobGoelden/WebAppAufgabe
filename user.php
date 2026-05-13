@@ -1,12 +1,13 @@
 <?php
-session_start();
+require_once("init.php");
 
+// kick out if not logged in
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
     header("Location: auth.php");
     exit;
 }
 
-require_once("init.php");
+// db config. will be moved later
 $servername = "localhost";
 $username_db = "root";
 $password_db = "";
@@ -17,7 +18,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// CSRF Token generieren falls nicht vorhanden
+// fallback: generate csrf token if missing (usually handled by init.php)
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
@@ -25,8 +26,8 @@ if (empty($_SESSION['csrf_token'])) {
 $message = "";
 $error = "";
 
-// Aktuelle Daten des Users laden (z.B. E-Mail)
-$user_id = $_SESSION['user_id'] ?? 0; // Wir brauchen die ID aus der Session
+// load current user data
+$user_id = $_SESSION['user_id'] ?? 0; // grab id from session
 $sql = "SELECT email FROM user WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
@@ -34,13 +35,15 @@ $stmt->execute();
 $current_user_data = $stmt->get_result()->fetch_assoc();
 $current_email = $current_user_data['email'] ?? 'None provided yet';
 
+// handle form submits
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // CSRF Check
+    
+    // security check: validate csrf token
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
         die("CSRF token validation failed.");
     }
 
-    // 1. EMAIL UPDATE
+    // 1. update email
     if (isset($_POST['update_email'])) {
         $new_email = filter_var($_POST['new_email'], FILTER_SANITIZE_EMAIL);
         if (filter_var($new_email, FILTER_VALIDATE_EMAIL)) {
@@ -58,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    // 2. PASSWORD UPDATE
+    // 2. update password
     if (isset($_POST['update_password'])) {
         $current_pw = $_POST['current_password'];
         $new_pw = $_POST['new_password'];
@@ -67,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($new_pw !== $confirm_pw) {
             $error = "New passwords do not match.";
         } else {
-            // Erst altes Passwort prüfen
+            // verify current password first
             $sql = "SELECT password FROM user WHERE id = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("i", $user_id);
@@ -75,6 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $hash = $stmt->get_result()->fetch_assoc()['password'];
 
             if (password_verify($current_pw, $hash)) {
+                // hash new password and update
                 $new_hash = password_hash($new_pw, PASSWORD_DEFAULT);
                 $sql = "UPDATE user SET password = ? WHERE id = ?";
                 $stmt = $conn->prepare($sql);
@@ -87,12 +91,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    // 3. DELETE ACCOUNT
+    // 3. delete account
     if (isset($_POST['delete_account'])) {
         $sql = "DELETE FROM user WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $user_id);
         if ($stmt->execute()) {
+            // kill session and redirect
             session_destroy();
             header("Location: auth.php?msg=account_deleted");
             exit;
