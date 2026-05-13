@@ -128,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
 </head>
 <body>
 
-    <h1>📷 Metadaten entfernen</h1>
+    <h1>Metadaten entfernen</h1>
     
     <form class="form-container" method="post" enctype="multipart/form-data">
         <input type="file" name="image" required>
