@@ -38,6 +38,7 @@ function checkPasswordLeak($password) {
     }
     return "Check läuft...";
 
+        #   bereitet die daten vor, dann geht es in die sendapi funktion 
     #passwort wird gehashed 
     #passwort wird nur gehashed als api call geschickt
     # dann werden die gelakten Password, welche mit dem Hash angefangen zurückgegbeben , nur die ersten 5 zeichen werden genommen 
