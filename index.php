@@ -2,7 +2,6 @@
 require_once("init.php");
 ?>
 
-<p><?php echo $is_logged_in; ?></p>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +24,7 @@ require_once("init.php");
         
         <div name="Links" class="container">
             <div>
-                <div name="feature1" class="subsite"></div>
+                <div name="Metadata" class="subsite"></div>
             </div>
             <div>
                 <div name="feature2" class="subsite"></div>
