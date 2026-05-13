@@ -7,8 +7,8 @@ function sendApiRequest($url) {
     $headers = ["user-agent: Security Guard"];
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     $response = curl_exec($ch);
-    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);      #fragt nach erfolg
+    curl_close($ch);                            #schliest session 
     return ['code' => $httpCode, 'data' => $response];
 }
 #cUrl int() startet die session 
@@ -16,7 +16,6 @@ function sendApiRequest($url) {
 #ich nutzte cUrl  $ch um Daten von einer anderen Website aubzurufen 
 # CURLOPT_RETURNTRANSFER sorgt für speicherung als string 
 # timeut verhindert das die Seite einfriert, falls api request langsamer ist 
-
 
 
 
