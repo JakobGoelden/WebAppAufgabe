@@ -45,7 +45,7 @@
         };
         xmlhttp.open("POST", "check.php", true);    /* sendung an check.php */
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlhttp.send("password=" +s encodeURIComponent(str));
+        xmlhttp.send("password=" + encodeURIComponent(str));
     }
     /*nutzten der ajax logik, bei jedem einzelnen Userinput wird die Funktion aufgerufen */ 
     /* xmlhhtprequest nimmt das passwort und schaut bei check.php nach den angaben */
