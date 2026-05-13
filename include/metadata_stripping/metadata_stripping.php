@@ -1,9 +1,7 @@
 <?php
-// show all errors while we are developing
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// set up folder names
 $uploadDir = 'uploads/';
 $cleanDir = 'clean/';
 
@@ -27,12 +25,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
     // append timestamp to filename to avoid duplicate names overwriting each other
     $baseName = time() . '_' . basename($file['name']);
     
-    // build paths for our three files
+    // build paths for our files
     $targetFile = $uploadDir . $baseName;
     $cleanFile = $cleanDir . 'clean_' . $baseName;
     $jsonFile = $cleanDir . 'metadata_' . $baseName . '.json';
 
-    // try to move the file to our uploads folder
+    // move file to our uploads folder
     if (move_uploaded_file($file['tmp_name'], $targetFile)) {
         
         $originalViewPath = $targetFile;
@@ -48,23 +46,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
             $exifData = @exif_read_data($targetFile);
             
             if ($exifData) {
-                // save data as a pretty json file
+                // save data as a json file
                 file_put_contents($jsonFile, json_encode($exifData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
                 $jsonDownloadPath = $jsonFile;
             }
         }
 
-        // step 2: clean image and rotate it correctly if needed
+        // clean image and rotate correctly if needed
         $imgResource = null; 
         
         if ($mime === 'image/jpeg') {
             // load original jpeg into memory
             $imgResource = imagecreatefromjpeg($targetFile);
             
-            // --- fix: rotate image before saving ---
             // check if rotation was saved in the extracted metadata
             if (isset($exifData['Orientation'])) {
-                // physically rotate the image based on the value (3, 6, or 8)
+                // rotate image based on the value (3, 6, or 8)
                 switch ($exifData['Orientation']) {
                     case 3:
                         // image is upside down -> rotate 180 degrees
@@ -80,33 +77,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
                         break;
                 }
             }
-            // ---------------------------------------
             
-            // save clean, correctly rotated jpeg (90% quality)
             imagejpeg($imgResource, $cleanFile, 90);
             
         } elseif ($mime === 'image/png') {
-            // load pngs (pngs rarely have this rotation problem)
+            // load pngs
             $imgResource = imagecreatefrompng($targetFile);
-            // save clean png (compression 6)
             imagepng($imgResource, $cleanFile, 6);
         }
 
-        // step 3: clean up
+        // clean up
         if ($imgResource !== null) {
             
-            // free up server memory
+            // clean up server memory
             imagedestroy($imgResource); 
             
-            // permanently delete original file with old metadata from the server
+            // permanently delete original file with old metadata from the database
             if (file_exists($targetFile)) {
                 unlink($targetFile); 
             }
 
-            // remember the path for the clean image to show the user
+            // remember path for the clean image to show the user
             $cleanViewPath = $cleanFile;
             
-            // output messages in german for the users
             $message = "✅ Metadaten erfolgreich entfernt und Originaldatei gelöscht!";
             
         } else {
