@@ -2,21 +2,22 @@
 
 ?>
 <link rel="stylesheet" href="./style/navbar.css">
+<script src="../functions.js"></script>
 <nav class="navbar">
-    <div class="nav-left">
-        <a href="index.php">WebAppName</a>
+    <div class="nav-subsite">
+        <a href="../../index.php">WebAppName</a>
     </div>
 
     <div class="nav-subsite">
-        <a href="../include/metadata_stripping/metadata_stripping.php">Metadaten entfernen</a>
+        <a href="../../include/metadata_stripping/metadata_stripping.php">Metadaten entfernen</a>
     </div>
 
     <div class="nav-subsite">
-        <a href="../fingerprinting/info.php">Fingerprinting</a>
+        <a href="../../include/fingerprinting/info.php">Fingerprinting</a>
     </div>
 
     <div class="nav-subsite">
-        <a href="../api-calls/skript.php">Passwort Checker</a>
+        <a href="../../include/api-calls/skript.php">Passwort Checker</a>
     </div>
 
     <div class="nav-subsite">

@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>WebApp Projekt</title>
-    <link rel="stylesheet" href="../style/main.css">
-    <link rel="stylesheet" href="../style/navbar.css">
+    <link rel="stylesheet" href="../../style/main.css">
+    <link rel="stylesheet" href="../../style/navbar.css">
     <style>
         .block {
             border: 1px solid #ccc;
@@ -56,7 +56,7 @@
     </script>
 </head>
 <body>
-    <?php include '../template/navbar.php'; ?>
+    <?php include '../../template/navbar.php'; ?>
 
     <h1>Browser Fingerprinting</h1>
     <br>

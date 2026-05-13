@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live Passwort Scanner</title>
-    <link rel="stylesheet" href="../style/main.css">
-    <link rel="stylesheet" href="../style/navbar.css">
+    <link rel="stylesheet" href="../../style/main.css">
+    <link rel="stylesheet" href="../../style/navbar.css">
     
     <style>
         /* Container für das Input-Feld und das Auge */
@@ -66,7 +66,7 @@
 </head>
 <body>
 
-<?php include '../template/navbar.php'; ?>
+<?php include '../../template/navbar.php'; ?>
     
 <div style="padding: 20px; max-width: 800px; margin: auto;">
     <h3>API Test Dashboard (Live-Scanner)</h3>

@@ -128,8 +128,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
     <link rel="stylesheet" href="../../style/navbar.css">
 </head>
 <body>
-    <?php include '../../template/navbar.php'; ?>
 
+    <?php include '../../template/navbar.php'; ?>
+    <div class="content"> 
     <h1>Metadaten entfernen</h1>
     
     <form class="form-container" method="post" enctype="multipart/form-data">
@@ -161,6 +162,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
     <?php elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && !$exifData): ?>
         <p><i>Keine EXIF-Metadaten im Original gefunden.</i></p>
     <?php endif; ?>
-
+    </div>
 </body>
 </html>
