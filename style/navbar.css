@@ -39,3 +39,16 @@
     background-color: #ddd;
 }
 
+#GuardX {
+    font-size: 1.3em;
+    font-weight: 900;
+    color: #ffffff;
+    
+    /* Scharfkantige 3D-Ebene nach rechts unten */
+    text-shadow: 
+        3px 3px 0px #0a6b31;
+}
+
+
+
+

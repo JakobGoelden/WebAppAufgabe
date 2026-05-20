@@ -128,15 +128,14 @@ html, body {
 
 .subsite {
   width: 500px;
-  height: 200px;
-  /*background-color: gray;*/
-  border-radius: 15px;
-  /*box-shadow: 0 0.125em 0.625em rgba(0,0,0,0.2);*/
+  min-height: 200px; /* min-height statt height schützt vor Text-Overflow */
+  padding: 25px;     /* Verhindert, dass der Inhalt am Rand klebt */
+  display: flow-root; /* Wichtig für das floating Icon */
   color: rgb(255, 255, 255);
   box-shadow: 0 0.125em 0.625em rgba(0,0,0,0.2);
   background-color: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
-  border-radius: 0.25em;
+  border-radius: 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -177,4 +176,27 @@ h2 {
   font-family: "Quantico", sans-serif;
   font-style: normal;
   padding: 2%;
+}
+
+.subsite_icon {
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 30px; /* Abstand zum Text, falls er darunter fließt */
+}
+
+.subsite_header {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-top: 0;       /* Verhindert Versatz nach oben */
+  margin-bottom: 10px; /* Abstand zum Fließtext */
+  text-align: left;    /* Überschreibt das globale text-align: center */
+  padding: 0;          /* Überschreibt das globale padding: 2% */
+}
+
+.subsite_text {
+  margin: 0;
+  line-height: 1.5;
+  color: #9ca3af;
+  text-align: left;
 }
