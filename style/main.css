@@ -178,25 +178,3 @@ h2 {
   padding: 2%;
 }
 
-.subsite_icon {
-  float: left;
-  margin-right: 20px;
-  margin-bottom: 30px; /* Abstand zum Text, falls er darunter fließt */
-}
-
-.subsite_header {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin-top: 0;       /* Verhindert Versatz nach oben */
-  margin-bottom: 10px; /* Abstand zum Fließtext */
-  text-align: left;    /* Überschreibt das globale text-align: center */
-  padding: 0;          /* Überschreibt das globale padding: 2% */
-}
-
-.subsite_text {
-  margin: 0;
-  line-height: 1.5;
-  color: #9ca3af;
-  text-align: left;
-}

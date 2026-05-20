@@ -366,6 +366,66 @@ $users = $result->fetch_all(MYSQLI_ASSOC);
 </div>
 
 <script src="functions.js"></script>
+<div id="timeoutModal" title="SYSTEM_WARNING" style="display: none;">
+  <p>Bist du noch da? Deine Sitzung läuft in wenigen Minuten ab.</p>
+</div>
+<div id="timeoutModal" title="SYSTEM_WARNING" style="display: none;">
+  <p>Bist du noch da? Deine Sitzung läuft in wenigen Minuten ab.</p>
+</div>
 
+<style>
+    .ui-dialog { background: #0d1117 !important; border: 2px solid #4ade80 !important; border-radius: 8px !important; box-shadow: 0 0 15px rgba(74, 222, 128, 0.2) !important; }
+    .ui-dialog-titlebar { background: transparent !important; border: none !important; border-bottom: 1px solid rgba(74, 222, 128, 0.3) !important; color: #4ade80 !important; font-family: 'Audiowide', sans-serif !important; }
+    .ui-dialog-content { background: transparent !important; color: white !important; font-family: 'Quantico', sans-serif !important; text-align: center !important; padding: 20px !important; }
+    .ui-dialog-buttonpane { background: transparent !important; border-top: 1px solid rgba(74, 222, 128, 0.3) !important; margin-top: 0 !important; padding: 10px !important; }
+    .ui-dialog .ui-button { background: #4ade80 !important; color: #0d1117 !important; border: none !important; font-family: 'Quantico', sans-serif !important; font-weight: bold !important; padding: 8px 16px !important; margin: 0 10px !important; }
+    .ui-dialog .ui-dialog-buttonset button:nth-child(2) { background: transparent !important; color: #ff4757 !important; border: 1px solid #ff4757 !important; }
+    .ui-dialog-titlebar-close { display: none !important; }
+</style>
+<script>
+    var warningTimer, logoutTimer;
+
+    function startMyTimers() {
+        clearTimeout(warningTimer);
+        clearTimeout(logoutTimer);
+
+        // Timer 1: Nach 3 Sekunden (zum Testen) aufploppen lassen
+        warningTimer = setTimeout(function() {
+            
+            $("#timeoutModal").dialog({
+                modal: true,
+                width: 400,
+                draggable: false, 
+                resizable: false, 
+                buttons: {
+                    "Bleiben": function() {
+                        fetch('keep_alive.php'); 
+                        $(this).dialog("destroy"); // Reißt das Fenster restlos ab
+                        startMyTimers(); // Startet die 3 Sekunden wieder von vorn
+                    },
+                    "Ausloggen": function() {
+                        // FIX: Leitet jetzt auf dein echtes Logout-Skript um!
+                        window.location.href = 'admin_logout.php';
+                    }
+                }
+            });
+
+            // Timer 2: Wenn das Fenster offen ist, hast du 10 Sekunden (zum Testen) bis zum Rauswurf
+            logoutTimer = setTimeout(function() {
+                // FIX: Auch hier auf das echte Logout-Skript umleiten!
+                window.location.href = 'admin_logout.php';
+            }, 10000);
+
+        }, 3000); 
+    }
+
+    // Wenn die Seite geladen ist und jQuery bereit ist: Start!
+    $(document).ready(function() {
+        if ($("#timeoutModal").length > 0) {
+            startMyTimers();
+        }
+    });
+</script>
 </body>
 </html>
+
