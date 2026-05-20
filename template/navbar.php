@@ -23,12 +23,20 @@
     <div class="nav-subsite">
         <a href="index.php">Subsite4</a>
     </div>
-    <!-- different mode if logged in or logged out -->
     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-        <a href="../../auth.php" class="nav-button">Mein Bereich</a>
+        
+        <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
+            <a href="admin.php" class="nav-button">System Admin</a>
+            <a href="user.php" class="nav-button">Mein Bereich</a>
+        <?php else: ?>
+            <a href="user.php" class="nav-button">Mein Bereich</a>
+        <?php endif; ?>
+
     <?php else: ?>
-        <a href="../../auth.php" class="nav-button">Login</a>
-    <?php endif; ?> 
+        
+        <a href="auth.php" class="nav-button">Login</a>
+        
+    <?php endif; ?>
     
 </nav>
 
