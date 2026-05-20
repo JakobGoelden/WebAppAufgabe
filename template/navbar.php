@@ -4,8 +4,8 @@
 <link rel="stylesheet" href="./style/navbar.css">
 <script src="../functions.js"></script>
 <nav class="navbar">
-    <div class="nav-subsite">
-        <a href="../../index.php">WebAppName</a>
+    <div class="nav-subsite" id="GuardX">
+        <a href="../../index.php">GuardX</a>
     </div>
 
     <div class="nav-subsite">
