@@ -6,6 +6,7 @@ error_reporting(E_ALL);
 // init session and generate csrf token
 require_once ("init.php");
 require_once ("functions.php");
+require_once ("config.php");
 
 // auto redirect if already logged in
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
@@ -18,20 +19,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     }
 }
 
-// db inputs hardcoded. will be moved at the end
-$servername = "localhost";
-$username_db   = "root";
-$password_db   = "";
-$dbname     = "users";
 
-$login_success = false;
-$redirect_url = '';
-
-// build db connection
-$conn = new mysqli($servername, $username_db, $password_db, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 // initialize for later
 $error_message = '';
