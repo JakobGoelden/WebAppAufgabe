@@ -2,26 +2,26 @@
 
 ?>
 <link rel="stylesheet" href="./style/navbar.css">
-<script src="../functions.js"></script>
+<script src="<?= get_url('functions.js') ?>"></script>
 <nav class="navbar">
     <div class="nav-subsite" id="GuardX">
-        <a href="../../index.php">GuardX</a>
+        <a href="<?= get_url('index.php') ?>">GuardX</a>
     </div>
 
     <div class="nav-subsite">
-        <a href="../../include/metadata_stripping/metadata_stripping.php">Metadaten entfernen</a>
+        <a href="<?= get_url('include/metadata_stripping/metadata_stripping.php') ?>">Metadaten entfernen</a>
     </div>
 
     <div class="nav-subsite">
-        <a href="../../include/fingerprinting/info.php">Fingerprinting</a>
+        <a href="<?= get_url('include/fingerprinting/info.php') ?>">Fingerprinting</a>
     </div>
 
     <div class="nav-subsite">
-        <a href="../../include/api-calls/skript.php">Passwort Checker</a>
+        <a href="<?= get_url('include/api-calls/skript.php') ?>">Passwort Checker</a>
     </div>
 
     <div class="nav-subsite">
-        <a href="index.php">Subsite4</a>
+        <a href="<?= get_url('index.php') ?>">Subsite4</a>
     </div>
     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
         
