@@ -24,7 +24,7 @@ require_once("init.php");
         
         <div name="Links" class="container">
             <div>
-                <div name="Metadata" class="subsite" href=/webapp/include/metadata_stripping.php"></div>
+                <div name="Metadata" class="subsite"></div>
             </div>
             <div>
                 <div name="feature2" class="subsite"></div>
@@ -39,5 +39,7 @@ require_once("init.php");
     </div>
                   
     <?php include './template/footer.php'; ?>
+    <?php include './api-calls/skript.php'; ?>
+
 </body>
 </html>
