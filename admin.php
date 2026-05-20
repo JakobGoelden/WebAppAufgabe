@@ -364,7 +364,8 @@ $users = $result->fetch_all(MYSQLI_ASSOC);
     </div>
 
 </div>
-
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://code.jquery.com/ui/1.14.2/jquery-ui.js"></script>
 <script src="functions.js"></script>
 <div id="timeoutModal" title="SYSTEM_WARNING" style="display: none;">
   <p>Bist du noch da? Deine Sitzung läuft in wenigen Minuten ab.</p>

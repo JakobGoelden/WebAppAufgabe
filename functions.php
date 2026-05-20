@@ -122,4 +122,29 @@ function get_secure_ip() {
     // if no trusted proxy/cloudflare was found, use the direct ip.
     return $_SERVER['REMOTE_ADDR'];
 }
+
+function smart_redirect($target_url) {
+    // 1. Bereinigt das Ziel (macht aus '/auth.php' sauber 'auth.php')
+    $clean_target = ltrim($target_url, '/');
+    
+    // 2. Prüft, ob 'webapp' in der aktuellen Adresszeile steht
+    if (strpos($_SERVER['REQUEST_URI'], '/webapp/') !== false) {
+        header("Location: /webapp/" . $clean_target);
+    } else {
+        // Normaler Fall für die anderen im Team oder den Live-Server
+        header("Location: /" . $clean_target);
+    }
+    exit; // WICHTIG: Nach einem Header-Redirect muss immer ein exit; kommen!
+}
+
+function get_url($target_url) {
+    $clean_target = ltrim($target_url, '/');
+    
+    // Prüft, ob 'webapp' in der aktuellen Adresszeile steht
+    if (strpos($_SERVER['REQUEST_URI'], '/webapp/') !== false) {
+        return "/webapp/" . $clean_target;
+    } else {
+        return "/" . $clean_target;
+    }
+}
 ?>
