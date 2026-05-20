@@ -4,8 +4,8 @@
 <link rel="stylesheet" href="./style/navbar.css">
 <script src="../functions.js"></script>
 <nav class="navbar">
-    <div class="nav-subsite">
-        <a href="../../index.php">WebAppName</a>
+    <div class="nav-subsite" id="GuardX">
+        <a href="../../index.php">GuardX</a>
     </div>
 
     <div class="nav-subsite">
@@ -26,15 +26,15 @@
     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
         
         <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
-            <a href="admin.php" class="nav-button">System Admin</a>
-            <a href="user.php" class="nav-button">Mein Bereich</a>
+            <a href="../../admin.php" class="nav-button">System Admin</a>
+            <a href="../../user.php" class="nav-button">Mein Bereich</a>
         <?php else: ?>
-            <a href="user.php" class="nav-button">Mein Bereich</a>
+            <a href="../../user.php" class="nav-button">Mein Bereich</a>
         <?php endif; ?>
 
     <?php else: ?>
         
-        <a href="auth.php" class="nav-button">Login</a>
+        <a href="../../auth.php" class="nav-button">Login</a>
         
     <?php endif; ?>
     

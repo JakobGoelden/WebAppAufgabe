@@ -128,15 +128,14 @@ html, body {
 
 .subsite {
   width: 500px;
-  height: 200px;
-  /*background-color: gray;*/
-  border-radius: 15px;
-  /*box-shadow: 0 0.125em 0.625em rgba(0,0,0,0.2);*/
+  min-height: 200px; /* min-height statt height schützt vor Text-Overflow */
+  padding: 25px;     /* Verhindert, dass der Inhalt am Rand klebt */
+  display: flow-root; /* Wichtig für das floating Icon */
   color: rgb(255, 255, 255);
   box-shadow: 0 0.125em 0.625em rgba(0,0,0,0.2);
   background-color: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
-  border-radius: 0.25em;
+  border-radius: 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
