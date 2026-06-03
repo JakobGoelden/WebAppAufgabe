@@ -8,6 +8,14 @@ require_once ("init.php");
 require_once ("functions.php");
 require_once ("config.php");
 
+// handle logout
+if (isset($_GET['action']) && $_GET['action'] === 'logout') {
+    session_unset();
+    session_destroy();
+    header("Location: index.php");
+    exit;
+}
+
 // auto redirect if already logged in
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {

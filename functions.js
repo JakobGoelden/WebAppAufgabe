@@ -27,8 +27,8 @@ $(document).ready(function() {
 });
 
 function startSessionTimers() {
-    const warnAfter = 3000; // Test: 3 Sekunden
-    const logoutAfter = 10000; // Test: 10 Sekunden
+    const warnAfter = 600000; // 10 Minuten
+    const logoutAfter = 720000; // 12 Minuten (2 min nach Warnung)
 
     clearTimeout(window.warningTimeout);
     clearTimeout(window.logoutTimeout);

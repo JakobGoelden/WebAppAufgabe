@@ -128,15 +128,32 @@ html, body {
 
 .subsite {
   width: 500px;
-  min-height: 200px; /* min-height statt height schützt vor Text-Overflow */
-  padding: 25px;     /* Verhindert, dass der Inhalt am Rand klebt */
-  display: flow-root; /* Wichtig für das floating Icon */
+  min-height: 200px;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
   color: rgb(255, 255, 255);
   box-shadow: 0 0.125em 0.625em rgba(0,0,0,0.2);
   background-color: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
   border-radius: 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.subsite_icon {
+  flex-shrink: 0;
+}
+
+.subsite_content {
+  display: flex;
+  flex-direction: column;
+}
+
+.subsite_header {
+  text-align: left;
+  padding: 0;
+  margin: 0 0 8px 0;
 }
 
 .message_shown {
