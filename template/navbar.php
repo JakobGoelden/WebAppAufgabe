@@ -20,9 +20,6 @@
         <a href="<?= get_url('include/api-calls/skript.php') ?>">Passwort Checker</a>
     </div>
 
-    <div class="nav-subsite">
-        <a href="<?= get_url('index.php') ?>">Subsite4</a>
-    </div>
     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
         
         <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
