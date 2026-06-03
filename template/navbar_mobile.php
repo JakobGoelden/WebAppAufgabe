@@ -7,7 +7,10 @@
     <div class="navbar-mobile-wrapper">
     
         <div class="navbar-mobile-header">
-            <span id="GuardX">GuardX</span>
+                <div class="nav-subsite" id="GuardX">
+                    <a href="<?= get_url('index.php') ?>">GuardX</a>
+                </div>
+            
             <button id="hamburgerBtn" class="hamburger-icon">☰</button>
         </div>
 
