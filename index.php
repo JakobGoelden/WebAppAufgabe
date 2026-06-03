@@ -32,10 +32,12 @@ require_once("functions.php");
                     <path d="M11 21l4.5-5.5L21 21Z" fill="#0F172A" />
                     <path d="M3 21l6-8 5 6.5L11 21Z" fill="#475569" />
                 </svg>
+                <div class="subsite_content">
                     <h2 class="subsite_header">Metadaten-Bereiniger</h2>
-                        <p class="subsite_text">
-                            Schütze deine Privatsphäre, indem du versteckte EXIF-Daten, GPS-Koordinaten und Kamera-Infos aus deinen Bildern entfernst, bevor du sie teilst.
-                        </p>
+                    <p class="subsite_text">
+                        Schütze deine Privatsphäre, indem du versteckte EXIF-Daten, GPS-Koordinaten und Kamera-Infos aus deinen Bildern entfernst, bevor du sie teilst.
+                    </p>
+                </div>
             </div>
 
             <div class="subsite">
@@ -52,10 +54,12 @@ require_once("functions.php");
                         <path d="M 5.0 16.0 L 5.0 14.2 A 7.0 9.0 0 0 1 14.0 5.2" stroke="#475569" />
                     </g>
                 </svg>
+                <div class="subsite_content">
                     <h2 class="subsite_header">Browser Fingerprinting</h2>
-                        <p class="subsite_text">
-                            Finde heraus, wie einzigartig dein Browser-Schnittstellen-Profil für Tracker ist. Analysiere, welche Spuren du beim Surfen im Netz hinterlässt.
-                        </p>
+                    <p class="subsite_text">
+                        Finde heraus, wie einzigartig dein Browser-Schnittstellen-Profil für Tracker ist. Analysiere, welche Spuren du beim Surfen im Netz hinterlässt.
+                    </p>
+                </div>
             </div>
     
             <div class="subsite">
@@ -66,14 +70,12 @@ require_once("functions.php");
                     <circle cx="12" cy="14.2" r="0.9" fill="#1E293B" />
                     <path d="M 12 14.2 L 12 16.5" stroke="#1E293B" stroke-width="1.2" stroke-linecap="round" />
                 </svg>
+                <div class="subsite_content">
                     <h2 class="subsite_header">Live Passwort Checker</h2>
-                        <p class="subsite_text">
-                            Überprüfe die Stärke deiner Passwörter in Echtzeit. Teste sie gegen bekannte Datenlecks, ohne die Sicherheit zu gefährden.
-                        </p>
-
-            </div>
-    
-            <div class="subsite">
+                    <p class="subsite_text">
+                        Überprüfe die Stärke deiner Passwörter in Echtzeit. Teste sie gegen bekannte Datenlecks, ohne die Sicherheit zu gefährden.
+                    </p>
+                </div>
             </div>
         </div>     
     </div>

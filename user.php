@@ -199,7 +199,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         clearTimeout(warningTimer);
         clearTimeout(logoutTimer);
 
-        // Timer 1: Nach 3 Sekunden (zum Testen) aufploppen lassen
+        // Timer 1: Nach 10 Minuten Warnung anzeigen
         warningTimer = setTimeout(function() {
             
             $("#timeoutModal").dialog({
@@ -220,13 +220,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 }
             });
 
-            // Timer 2: Wenn das Fenster offen ist, hast du 10 Sekunden (zum Testen) bis zum Rauswurf
+            // Timer 2: Nach weiteren 2 Minuten automatischer Logout
             logoutTimer = setTimeout(function() {
-                // FIX: Auch hier auf das echte Logout-Skript umleiten!
                 window.location.href = 'admin_logout.php';
-            }, 10000);
+            }, 120000);
 
-        }, 3000); 
+        }, 600000);
     }
 
     // Wenn die Seite geladen ist und jQuery bereit ist: Start!
