@@ -1,3 +1,8 @@
+<?php
+require_once("../../init.php");
+require_once("../../functions.php");
+require_once("../../config.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 

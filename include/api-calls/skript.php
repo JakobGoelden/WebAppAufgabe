@@ -65,8 +65,12 @@
     </script>
 </head>
 <body>
-
-<?php include '../../template/navbar.php'; ?>
+<?php
+require_once("../../init.php");
+require_once("../../functions.php");
+require_once("../../config.php");
+include '../../template/navbar.php'; 
+?>
     
 <div style="padding: 20px; max-width: 800px; margin: auto;">
     <h3>API Test Dashboard (Live-Scanner)</h3>
