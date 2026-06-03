@@ -61,7 +61,13 @@ require_once("../../config.php");
     </script>
 </head>
 <body>
-    <?php include '../../template/navbar.php'; ?>
+    <?php 
+    if (is_mobile()) {
+        include '../../template/navbar_mobile.php'; 
+    } else {
+        include '../../template/navbar.php';        
+    } 
+    ?>
 
     <h1>Browser Fingerprinting</h1>
     <br>

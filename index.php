@@ -16,7 +16,14 @@ require_once("functions.php");
 <script src="functions.js"></script>
 
 <body>
-    <?php include './template/navbar.php'; ?>
+    <?php 
+    if (is_mobile()) {
+        include './template/navbar_mobile.php'; 
+    } else {
+        include './template/navbar.php';        
+    } 
+    ?>
+
 
     <div class="content">
 

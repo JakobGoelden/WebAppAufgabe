@@ -43,12 +43,65 @@
     font-size: 1.3em;
     font-weight: 900;
     color: #ffffff;
-    
-    /* Scharfkantige 3D-Ebene nach rechts unten */
     text-shadow: 
         3px 3px 0px #0a6b31;
 }
 
+/* ========================================== */
+/* MOBILE HAMBURGER NAVBAR (Glassmorphism)    */
+/* ========================================== */
 
+.navbar-mobile-wrapper {
+    /* Exakt dieselben Werte wie in deiner .navbar */
+    position: sticky;
+    top: 10px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column; 
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    border-radius: 0.25em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0.125em 0.625em rgba(0,0,0,0.2);
+    /* Optional: Ein bisschen Abstand zu den Bildschirmrändern am Handy */
+    margin: 0 10px; 
+}
 
+/* Der obere sichtbare Bereich (Logo + Button) */
+.navbar-mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25em; /* Dein Original-Padding */
+}
+
+/* Der Hamburger-Button (☰) */
+.hamburger-icon {
+    background: transparent;
+    border: none;
+    color: #ffffff; /* Weiß, passend zum restlichen Text */
+    font-size: 28px;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* Das Container für die Links (Startzustand: unsichtbar) */
+.mobile-links {
+    display: none; 
+    flex-direction: column;
+    gap: 10px; /* Abstand zwischen den Buttons */
+    padding: 0 1.25em 1.25em 1.25em; /* Padding nur unten und an den Seiten */
+}
+
+/* Die Links im Mobile-Dropdown (Nutzen deine .nav-button Klasse) */
+.mobile-links .nav-button {
+    text-align: center;
+    width: 100%; /* Buttons ziehen sich über die volle Breite */
+    box-sizing: border-box;
+}
+
+/* Die JS-Klasse, die das Menü einblendet */
+.mobile-links.show-menu {
+    display: flex !important;
+}
 

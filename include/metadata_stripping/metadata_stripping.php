@@ -131,7 +131,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
 </head>
 <body>
 
-    <?php include '../../template/navbar.php'; ?>
+    <?php 
+    if (is_mobile()) {
+        include '../../template/navbar_mobile.php'; 
+    } else {
+        include '../../template/navbar.php';        
+    } 
+    ?>
     <div class="content"> 
     <h1>Metadaten entfernen</h1>
     

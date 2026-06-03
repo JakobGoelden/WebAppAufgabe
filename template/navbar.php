@@ -1,6 +1,7 @@
 <?php
 
 ?>
+
 <link rel="stylesheet" href="./style/navbar.css">
 <script src="<?= get_url('functions.js') ?>"></script>
 <nav class="navbar">

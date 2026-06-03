@@ -69,7 +69,13 @@
 require_once("../../init.php");
 require_once("../../functions.php");
 require_once("../../config.php");
-include '../../template/navbar.php'; 
+
+if (is_mobile()) {
+    include '../../template/navbar_mobile.php'; 
+} else {
+    include '../../template/navbar.php';        
+} 
+
 ?>
     
 <div style="padding: 20px; max-width: 800px; margin: auto;">
