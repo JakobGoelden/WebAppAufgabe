@@ -130,9 +130,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
 <?php 
 if (is_mobile()) {
-    include './template/navbar_mobile.php'; 
+    include '../../template/navbar_mobile.php'; 
 } else {
-    include './template/navbar.php';        
+    include '../../template/navbar.php';        
 } 
 ?>
 <div class="dashboard-container">
