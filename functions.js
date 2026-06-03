@@ -61,3 +61,14 @@ function startSessionTimers() {
         window.location.href = 'auth.php?action=logout';
     }, logoutAfter);
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    const hamburgerBtn = document.getElementById("hamburgerBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    if (hamburgerBtn && mobileMenu) {
+        hamburgerBtn.addEventListener("click", function() {
+            mobileMenu.classList.toggle("show-menu");
+        });
+    }
+});
