@@ -244,7 +244,13 @@ $users = $result->fetch_all(MYSQLI_ASSOC);
 </head>
 <body>
 
-<?php include './template/navbar.php'; ?>
+<?php 
+if (is_mobile()) {
+    include './template/navbar_mobile.php'; 
+} else {
+    include './template/navbar.php';        
+} 
+?>
 
 <div class="glow-box box-1"></div>
 <div class="glow-box box-2"></div>
