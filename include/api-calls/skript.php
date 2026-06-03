@@ -71,9 +71,9 @@ require_once("../../functions.php");
 require_once("../../config.php");
 
 if (is_mobile()) {
-    include './template/navbar_mobile.php'; 
+    include '../../template/navbar_mobile.php'; 
 } else {
-    include './template/navbar.php';        
+    include '../../template/navbar.php';        
 } 
 
 ?>
