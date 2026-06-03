@@ -3,10 +3,11 @@
 ?>
 <link rel="stylesheet" href="./style/navbar.css">
 <script src="<?= get_url('functions.js') ?>"></script>
-<nav class="navbar">
+<nav class="mobile-navbar">
     <div class="nav-subsite" id="GuardX">
         <a href="<?= get_url('index.php') ?>">GuardX</a>
     </div>
+
 
     <div class="nav-subsite">
         <a href="<?= get_url('include/metadata_stripping/metadata_stripping.php') ?>">Metadaten entfernen</a>
@@ -34,6 +35,8 @@
         <a href="<?= get_url('auth.php') ?>" class="nav-button">Login</a>
         
     <?php endif; ?>
+
+
     
 </nav>
 

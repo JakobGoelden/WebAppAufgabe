@@ -15,6 +15,22 @@
     padding: 1.25em;
 }
 
+.mobile-navbar{
+    position: sticky;
+    top: 10px;
+    z-index: 1000;
+    justify-content: space-between;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    box-shadow: 0 0.125em 0.625em rgba(0,0,0,0.2);
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    border-radius: 0.25em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    padding: 1.25em;
+}
+
 .nav-subsite a {  
     color: #ddd;  
     text-decoration: none;
