@@ -26,7 +26,21 @@ body {
 
   background-attachment: fixed;
   font-family: "Quantico", sans-serif;
+
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
 }
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+html, body {
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* IE/old Edge */
+}
+
 
 .glow-box {
   position: absolute;
@@ -35,7 +49,7 @@ body {
   box-shadow: 
     0 0 10px #4ade804d, 
     inset 0 0 10px rgba(74, 222, 128, 0.2);
-  z-index: 0;
+  z-index: -1;
 }
 
 .box-1 {
@@ -45,6 +59,7 @@ body {
   left: 8%;
   transform: rotate(-5deg);
   position: fixed;
+  z-index: -1;
 }
 
 .box-2 {
@@ -54,6 +69,7 @@ body {
   left: 45%;
   border-width: 1px;
   position: fixed;
+  z-index: -1;
 }
 
 .box-3 {
@@ -66,6 +82,7 @@ body {
   box-shadow: 0 0 30px rgba(74, 222, 128, 0.5);
   opacity: 50%;
   position: fixed;
+  z-index: -1;
 }
 
 .box-4 {
@@ -77,6 +94,7 @@ body {
   border-color: rgba(74, 222, 128, 0.8);
   box-shadow: 0 0 15px rgba(74, 222, 128, 0.5);
   position: fixed;
+  z-index: -1;
 }
 
 .box-5 {
@@ -85,6 +103,7 @@ body {
   top: 66.5%;
   right: 65%;
   position: fixed;
+  z-index: -1;
 }
 
 .content {
@@ -109,15 +128,14 @@ body {
 
 .subsite {
   width: 500px;
-  height: 200px;
-  /*background-color: gray;*/
-  border-radius: 15px;
-  /*box-shadow: 0 0.125em 0.625em rgba(0,0,0,0.2);*/
+  min-height: 200px; /* min-height statt height schützt vor Text-Overflow */
+  padding: 25px;     /* Verhindert, dass der Inhalt am Rand klebt */
+  display: flow-root; /* Wichtig für das floating Icon */
   color: rgb(255, 255, 255);
   box-shadow: 0 0.125em 0.625em rgba(0,0,0,0.2);
   background-color: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
-  border-radius: 0.25em;
+  border-radius: 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -159,3 +177,4 @@ h2 {
   font-style: normal;
   padding: 2%;
 }
+

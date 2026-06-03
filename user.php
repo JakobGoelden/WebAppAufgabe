@@ -1,12 +1,13 @@
 <?php
-session_start();
+require_once("init.php");
 
+// kick out if not logged in
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
     header("Location: auth.php");
     exit;
 }
 
-require_once("init.php");
+// db config. will be moved later
 $servername = "localhost";
 $username_db = "root";
 $password_db = "";
@@ -17,7 +18,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// CSRF Token generieren falls nicht vorhanden
+// fallback: generate csrf token if missing (usually handled by init.php)
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
@@ -25,8 +26,8 @@ if (empty($_SESSION['csrf_token'])) {
 $message = "";
 $error = "";
 
-// Aktuelle Daten des Users laden (z.B. E-Mail)
-$user_id = $_SESSION['user_id'] ?? 0; // Wir brauchen die ID aus der Session
+// load current user data
+$user_id = $_SESSION['user_id'] ?? 0; // grab id from session
 $sql = "SELECT email FROM user WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
@@ -34,13 +35,15 @@ $stmt->execute();
 $current_user_data = $stmt->get_result()->fetch_assoc();
 $current_email = $current_user_data['email'] ?? 'None provided yet';
 
+// handle form submits
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // CSRF Check
+    
+    // security check: validate csrf token
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
         die("CSRF token validation failed.");
     }
 
-    // 1. EMAIL UPDATE
+    // 1. update email
     if (isset($_POST['update_email'])) {
         $new_email = filter_var($_POST['new_email'], FILTER_SANITIZE_EMAIL);
         if (filter_var($new_email, FILTER_VALIDATE_EMAIL)) {
@@ -58,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    // 2. PASSWORD UPDATE
+    // 2. update password
     if (isset($_POST['update_password'])) {
         $current_pw = $_POST['current_password'];
         $new_pw = $_POST['new_password'];
@@ -67,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($new_pw !== $confirm_pw) {
             $error = "New passwords do not match.";
         } else {
-            // Erst altes Passwort prüfen
+            // verify current password first
             $sql = "SELECT password FROM user WHERE id = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("i", $user_id);
@@ -75,6 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $hash = $stmt->get_result()->fetch_assoc()['password'];
 
             if (password_verify($current_pw, $hash)) {
+                // hash new password and update
                 $new_hash = password_hash($new_pw, PASSWORD_DEFAULT);
                 $sql = "UPDATE user SET password = ? WHERE id = ?";
                 $stmt = $conn->prepare($sql);
@@ -87,12 +91,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    // 3. DELETE ACCOUNT
+    // 3. delete account
     if (isset($_POST['delete_account'])) {
         $sql = "DELETE FROM user WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $user_id);
         if ($stmt->execute()) {
+            // kill session and redirect
             session_destroy();
             header("Location: auth.php?msg=account_deleted");
             exit;
@@ -166,5 +171,70 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <p style="margin-top: 20px;"><a href="./admin_logout.php">Logout</a></p>
 </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.2/jquery-ui.js"></script>
+    <script src="functions.js"></script>
+
+    <div id="timeoutModal" title="SYSTEM_WARNING" style="display: none;">
+        <p>Bist du noch da? Deine Sitzung läuft in wenigen Minuten ab.</p>
+    </div>
+    <div id="timeoutModal" title="SYSTEM_WARNING" style="display: none;">
+  <p>Bist du noch da? Deine Sitzung läuft in wenigen Minuten ab.</p>
+</div>
+
+<style>
+    .ui-dialog { background: #0d1117 !important; border: 2px solid #4ade80 !important; border-radius: 8px !important; box-shadow: 0 0 15px rgba(74, 222, 128, 0.2) !important; }
+    .ui-dialog-titlebar { background: transparent !important; border: none !important; border-bottom: 1px solid rgba(74, 222, 128, 0.3) !important; color: #4ade80 !important; font-family: 'Audiowide', sans-serif !important; }
+    .ui-dialog-content { background: transparent !important; color: white !important; font-family: 'Quantico', sans-serif !important; text-align: center !important; padding: 20px !important; }
+    .ui-dialog-buttonpane { background: transparent !important; border-top: 1px solid rgba(74, 222, 128, 0.3) !important; margin-top: 0 !important; padding: 10px !important; }
+    .ui-dialog .ui-button { background: #4ade80 !important; color: #0d1117 !important; border: none !important; font-family: 'Quantico', sans-serif !important; font-weight: bold !important; padding: 8px 16px !important; margin: 0 10px !important; }
+    .ui-dialog .ui-dialog-buttonset button:nth-child(2) { background: transparent !important; color: #ff4757 !important; border: 1px solid #ff4757 !important; }
+    .ui-dialog-titlebar-close { display: none !important; }
+</style>
+<script>
+    var warningTimer, logoutTimer;
+
+    function startMyTimers() {
+        clearTimeout(warningTimer);
+        clearTimeout(logoutTimer);
+
+        // Timer 1: Nach 3 Sekunden (zum Testen) aufploppen lassen
+        warningTimer = setTimeout(function() {
+            
+            $("#timeoutModal").dialog({
+                modal: true,
+                width: 400,
+                draggable: false, 
+                resizable: false, 
+                buttons: {
+                    "Bleiben": function() {
+                        fetch('keep_alive.php'); 
+                        $(this).dialog("destroy"); // Reißt das Fenster restlos ab
+                        startMyTimers(); // Startet die 3 Sekunden wieder von vorn
+                    },
+                    "Ausloggen": function() {
+                        // FIX: Leitet jetzt auf dein echtes Logout-Skript um!
+                        window.location.href = 'admin_logout.php';
+                    }
+                }
+            });
+
+            // Timer 2: Wenn das Fenster offen ist, hast du 10 Sekunden (zum Testen) bis zum Rauswurf
+            logoutTimer = setTimeout(function() {
+                // FIX: Auch hier auf das echte Logout-Skript umleiten!
+                window.location.href = 'admin_logout.php';
+            }, 10000);
+
+        }, 3000); 
+    }
+
+    // Wenn die Seite geladen ist und jQuery bereit ist: Start!
+    $(document).ready(function() {
+        if ($("#timeoutModal").length > 0) {
+            startMyTimers();
+        }
+    });
+</script>
 </body>
 </html>
