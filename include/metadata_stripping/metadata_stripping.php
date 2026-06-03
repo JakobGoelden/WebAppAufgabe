@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -10,8 +8,8 @@ $uploadDir = 'uploads/';
 $cleanDir = 'clean/';
 
 // create folders if they don't exist (0777 = max permissions)
-if (!is_dir($uploadDir)) mkdir($uploadDir, 0777, true);
-if (!is_dir($cleanDir)) mkdir($cleanDir, 0777, true);
+//if (!is_dir($uploadDir)) mkdir($uploadDir, 0777, true);
+//if (!is_dir($cleanDir)) mkdir($cleanDir, 0777, true);
 
 // prepare empty variables
 $message = "";
