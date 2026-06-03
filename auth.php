@@ -206,7 +206,13 @@ $action = $_GET['action'] ?? 'login';
 </head>
 <body>
 
-<?php include './template/navbar.php'; ?>
+<?php 
+if (is_mobile()) {
+    include './template/navbar_mobile.php'; 
+} else {
+    include './template/navbar.php';        
+} 
+?>
 
 <?php if ($error_message): ?>
     <div class="error"><?php echo $error_message; ?></div>
