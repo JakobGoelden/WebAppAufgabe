@@ -1,22 +1,12 @@
 <?php
 require_once("init.php");
 require_once("functions.php");
+require_once("config.php");
 
 // kick out if not logged in
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
     header("Location: auth.php");
     exit;
-}
-
-// db config. will be moved later
-$servername = "localhost";
-$username_db = "root";
-$password_db = "";
-$dbname = "users";
-
-$conn = new mysqli($servername, $username_db, $password_db, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
 }
 
 // fallback: generate csrf token if missing (usually handled by init.php)

@@ -2,7 +2,8 @@
 
 ?>
 
-<link rel="stylesheet" href="./style/navbar.css">
+<link rel="stylesheet" href="<?= get_url('style/navbar.css') ?>">
+<script>var BASE_URL = <?= json_encode(BASE_URL) ?>;</script>
 <script src="<?= get_url('functions.js') ?>"></script>
 <nav class="navbar">
     <div class="nav-subsite" id="GuardX">

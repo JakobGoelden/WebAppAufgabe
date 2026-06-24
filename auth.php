@@ -8,6 +8,9 @@ require_once ("init.php");
 require_once ("functions.php");
 require_once ("config.php");
 
+$login_success = false;
+$redirect_url = '';
+
 // handle logout
 if (isset($_GET['action']) && $_GET['action'] === 'logout') {
     session_unset();

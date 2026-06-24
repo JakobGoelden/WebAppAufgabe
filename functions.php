@@ -124,28 +124,14 @@ function get_secure_ip() {
 }
 
 function smart_redirect($target_url) {
-    // 1. Bereinigt das Ziel (macht aus '/auth.php' sauber 'auth.php')
     $clean_target = ltrim($target_url, '/');
-    
-    // 2. Prüft, ob 'webapp' in der aktuellen Adresszeile steht
-    if (strpos($_SERVER['REQUEST_URI'], '/webapp/') !== false) {
-        header("Location: /webapp/" . $clean_target);
-    } else {
-        // Normaler Fall für die anderen im Team oder den Live-Server
-        header("Location: /" . $clean_target);
-    }
-    exit; // WICHTIG: Nach einem Header-Redirect muss immer ein exit; kommen!
+    header("Location: " . BASE_URL . $clean_target);
+    exit;
 }
 
 function get_url($target_url) {
     $clean_target = ltrim($target_url, '/');
-    
-    // Prüft, ob 'webapp' in der aktuellen Adresszeile steht
-    if (strpos($_SERVER['REQUEST_URI'], '/webapp/') !== false) {
-        return "/webapp/" . $clean_target;
-    } else {
-        return "/" . $clean_target;
-    }
+    return BASE_URL . $clean_target;
 }
 
 function is_mobile() {

@@ -1,19 +1,7 @@
 <?php
-// pull in session config and security headers.
 require_once("init.php");
 require_once("functions.php");
-
-// db inputs hardcoded. will be moved at the end
-$servername = "localhost";
-$username_db   = "root";
-$password_db   = "";
-$dbname     = "users";
-
-// build db connection
-$conn = new mysqli($servername, $username_db, $password_db, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require_once("config.php");
 
 // login double check: kick out if session cookie is missing or invalid.
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {

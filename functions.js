@@ -14,7 +14,8 @@ document.querySelectorAll('.subsite').forEach(item => {
     item.addEventListener('click', function() {
         const target = this.getAttribute('href');
         if (target) {
-            window.location.href = window.location.origin + "/webapp/" + target.replace(/^\//, "");
+            var baseUrl = (typeof BASE_URL !== 'undefined') ? BASE_URL : '/';
+            window.location.href = window.location.origin + baseUrl + target.replace(/^\//, "");
         }
     });
 });
