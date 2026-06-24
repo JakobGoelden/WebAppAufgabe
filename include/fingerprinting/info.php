@@ -8,6 +8,7 @@ require_once("../../config.php");
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebApp Projekt</title>
     <link rel="stylesheet" href="../../style/main.css">
     <link rel="stylesheet" href="../../style/navbar.css">
@@ -156,5 +157,4 @@ require_once("../../config.php");
         The danger comes from combining them together. 
         When dozens of small details are collected at once, they can create a fingerprint unique enough to track you across websites, even without cookies or logging into an account.
     </p>
-    </script>
 </body>

@@ -105,3 +105,25 @@
     display: flex !important;
 }
 
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.4rem;
+    }
+    h2 {
+        font-size: 1.1rem;
+    }
+    body {
+        padding: 0 15px;
+    }
+    p, span, li, td, th {
+        overflow-wrap: break-word;
+        word-break: break-word;
+        max-width: 100%;
+    }
+    .block {
+        overflow: hidden;
+        box-sizing: border-box;
+        width: 100%;
+    }
+}
+

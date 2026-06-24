@@ -9,6 +9,7 @@ body {
   background-color: #0d1117;
   color: #ddd;
   overflow-x: hidden;
+  max-width: 100vw;
 
   background-image: 
     radial-gradient(circle at 85% 15%, rgba(46, 204, 113, 0.15) 0%, transparent 40%),
@@ -39,6 +40,8 @@ body::-webkit-scrollbar {
 html, body {
   scrollbar-width: none;      /* Firefox */
   -ms-overflow-style: none;   /* IE/old Edge */
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 

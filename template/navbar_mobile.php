@@ -1,7 +1,7 @@
 <?php
 
 ?>
-<link rel="stylesheet" href="./style/navbar.css">
+<link rel="stylesheet" href="<?= get_url('style/navbar.css') ?>">
 <script src="<?= get_url('functions.js') ?>"></script>
 <nav class="mobile-navbar">
     <div class="navbar-mobile-wrapper">
