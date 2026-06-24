@@ -164,27 +164,34 @@ html, body {
   margin: 0 0 8px 0;
 }
 
-.message_shown {
+.message-banner {
   position: fixed;
-  bottom: 20px;       
-  right: 20px;        
-  background-color: #4CAF50; 
-  color: white;
-  padding: 15px 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  max-width: 500px;
+  text-align: center;
+  padding: 14px 30px;
   font-family: sans-serif;
-  z-index: 1000;
-  
+  z-index: 999;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   opacity: 1;
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-  transform: translateY(0);
+  transition: opacity 0.5s ease-in-out;
+  background-color: #4CAF50;
+  color: white;
 }
 
-.message_hidden {
+.message-banner.message-error {
+  background-color: #f2dede;
+  color: #a94442;
+  border: 1px solid #ebccd1;
+}
+
+.message-banner-hidden {
   opacity: 0;
-  transform: translateY(20px);
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 h1 {

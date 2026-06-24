@@ -61,7 +61,7 @@ if (is_mobile()) {
 ?>
     
 <div class="content-narrow">
-    <h3>API Test Dashboard (Live-Scanner)</h3>
+    <h1>API Test Dashboard (Live-Scanner)</h1>
     <br>
 
     <div class="input-container">

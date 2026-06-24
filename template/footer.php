@@ -13,7 +13,7 @@ include_once("config.php");
     </div>
 </footer>
 
-<div id="message_shown" class="message_hidden"></div>
+<div id="message_banner" class="message-banner-hidden"></div>
 
 <?php if (isset($login_success) && $login_success): ?>
     <script>

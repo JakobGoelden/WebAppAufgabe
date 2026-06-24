@@ -215,15 +215,7 @@ if (is_mobile()) {
 } 
 ?>
 
-<?php if ($error_message): ?>
-    <div class="error"><?php echo $error_message; ?></div>
-<?php endif; ?>
-
-<?php if ($success_message): ?>
-    <div class="success"><?php echo $success_message; ?></div>
-<?php endif; ?>
-
-<div id="message_shown" class="message_hidden"></div>
+<div id="message_banner" class="message-banner-hidden"></div>
 
 <?php if ($action === 'register'): ?>
 
@@ -274,11 +266,16 @@ if (is_mobile()) {
 
 <script src="functions.js"></script>
 
+<?php if ($error_message): ?>
+    <script>showMessage(<?= json_encode($error_message) ?>, "error");</script>
+<?php endif; ?>
+
+<?php if ($success_message): ?>
+    <script>showMessage(<?= json_encode($success_message) ?>, "success");</script>
+<?php endif; ?>
+
 <?php if ($login_success): ?>
-    <script>
-        // trigger js redirect 
-        handleSuccessfulLogin("<?php echo $redirect_url; ?>");
-    </script>
+    <script>handleSuccessfulLogin("<?php echo $redirect_url; ?>");</script>
 <?php endif; ?>
 
 

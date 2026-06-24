@@ -1,13 +1,18 @@
-function handleSuccessfulLogin(targetUrl) {
-    const msgDiv = document.getElementById("message_shown");
-    if (msgDiv) {
-        msgDiv.innerText = "Erfolgreich eingeloggt! Weiterleitung...";
-        msgDiv.className = "message_shown"; 
-    }
-    
+function showMessage(text, type) {
+    const msgDiv = document.getElementById("message_banner");
+    if (!msgDiv) return;
+    msgDiv.innerText = text;
+    msgDiv.className = "message-banner" + (type === "error" ? " message-error" : "");
     setTimeout(() => {
-      window.location.href = targetUrl; 
-    }, 1500); 
+        msgDiv.className = "message-banner-hidden";
+    }, 4000);
+}
+
+function handleSuccessfulLogin(targetUrl) {
+    showMessage("Erfolgreich eingeloggt! Weiterleitung...", "success");
+    setTimeout(() => {
+        window.location.href = targetUrl;
+    }, 1500);
 }
 
 document.querySelectorAll('.subsite').forEach(item => {

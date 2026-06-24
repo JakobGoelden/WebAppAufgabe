@@ -152,7 +152,9 @@ if (is_mobile()) {
         </form>
     </div>
 
-    <p class="mt-20"><a href="./admin_logout.php">Logout</a></p>
+    <form action="./admin_logout.php" class="mt-20">
+        <button type="submit" class="btn-delete">Logout</button>
+    </form>
 </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
