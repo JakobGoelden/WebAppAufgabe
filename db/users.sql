@@ -139,6 +139,18 @@ INSERT INTO `login_logs` (`id`, `user_id`, `ip_address`, `login_time`, `success`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `register_logs`
+--
+
+CREATE TABLE `register_logs` (
+  `id` int(11) NOT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `attempt_time` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -176,6 +188,12 @@ ALTER TABLE `login_logs`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `register_logs`
+--
+ALTER TABLE `register_logs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -190,6 +208,12 @@ ALTER TABLE `user`
 --
 ALTER TABLE `login_logs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+
+--
+-- AUTO_INCREMENT for table `register_logs`
+--
+ALTER TABLE `register_logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`
