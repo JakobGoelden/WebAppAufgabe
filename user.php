@@ -104,22 +104,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Profile</title>
     <link rel="stylesheet" href="./style/main.css">
-    <style>
-        body { font-family: sans-serif; padding: 20px; }
-        .dashboard-container { max-width: 800px; margin: 2em auto; background: grey; padding: 30px; border-radius: 0.75em; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        h1 { color: #333; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .section { margin-top: 30px; border: 1px solid #ddd; padding: 20px; border-radius: 5px; }
-        .alert { padding: 10px; margin-bottom: 20px; border-radius: 4px; }
-        .success { background: #dff0d8; color: #3c763d; border: 1px solid #d6e9c6; }
-        .danger { background: #f2dede; color: #a94442; border: 1px solid #ebccd1; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        button { background: #337ab7; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
-        .btn-delete { background: #d9534f; margin-top: 10px; }
-    </style>
 </head>
-<body>
+<body class="page-user">
 <?php 
 if (is_mobile()) {
     include './template/navbar_mobile.php'; 
@@ -157,8 +143,8 @@ if (is_mobile()) {
         </form>
     </div>
 
-    <div class="section" style="border-color: #ebccd1;">
-        <h2 style="color: #a94442;">Danger Zone</h2>
+    <div class="section section-danger">
+        <h2 class="heading-danger">Danger Zone</h2>
         <p>Once you delete your account, there is no going back. Please be certain.</p>
         <form action="user.php" method="POST" onsubmit="return confirm('Do you really want to delete your account?');">
             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
@@ -166,7 +152,7 @@ if (is_mobile()) {
         </form>
     </div>
 
-    <p style="margin-top: 20px;"><a href="./admin_logout.php">Logout</a></p>
+    <p class="mt-20"><a href="./admin_logout.php">Logout</a></p>
 </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -174,22 +160,13 @@ if (is_mobile()) {
     <script src="https://code.jquery.com/ui/1.14.2/jquery-ui.js"></script>
     <script src="functions.js"></script>
 
-    <div id="timeoutModal" title="SYSTEM_WARNING" style="display: none;">
+    <div id="timeoutModal" title="SYSTEM_WARNING" class="modal-hidden">
         <p>Bist du noch da? Deine Sitzung läuft in wenigen Minuten ab.</p>
     </div>
-    <div id="timeoutModal" title="SYSTEM_WARNING" style="display: none;">
+    <div id="timeoutModal" title="SYSTEM_WARNING" class="modal-hidden">
   <p>Bist du noch da? Deine Sitzung läuft in wenigen Minuten ab.</p>
 </div>
 
-<style>
-    .ui-dialog { background: #0d1117 !important; border: 2px solid #4ade80 !important; border-radius: 8px !important; box-shadow: 0 0 15px rgba(74, 222, 128, 0.2) !important; }
-    .ui-dialog-titlebar { background: transparent !important; border: none !important; border-bottom: 1px solid rgba(74, 222, 128, 0.3) !important; color: #4ade80 !important; font-family: 'Audiowide', sans-serif !important; }
-    .ui-dialog-content { background: transparent !important; color: white !important; font-family: 'Quantico', sans-serif !important; text-align: center !important; padding: 20px !important; }
-    .ui-dialog-buttonpane { background: transparent !important; border-top: 1px solid rgba(74, 222, 128, 0.3) !important; margin-top: 0 !important; padding: 10px !important; }
-    .ui-dialog .ui-button { background: #4ade80 !important; color: #0d1117 !important; border: none !important; font-family: 'Quantico', sans-serif !important; font-weight: bold !important; padding: 8px 16px !important; margin: 0 10px !important; }
-    .ui-dialog .ui-dialog-buttonset button:nth-child(2) { background: transparent !important; color: #ff4757 !important; border: 1px solid #ff4757 !important; }
-    .ui-dialog-titlebar-close { display: none !important; }
-</style>
 <script>
     var warningTimer, logoutTimer;
 

@@ -7,28 +7,6 @@
     <link rel="stylesheet" href="../../style/main.css">
     <link rel="stylesheet" href="../../style/navbar.css">
     
-    <style>
-        /* Container für das Input-Feld und das Auge */
-        .password-wrapper {
-            position: relative;
-            width: 100%;
-        }
-        
-        .toggle-password {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            z-index: 1000; /* Damit es immer über dem Input liegt */
-            user-select: none;
-            font-size: 20px;
-        }
-
-        #passwordField {
-            padding-right: 40px; /* Platz für das Auge lassen */
-        }
-    </style>
 
     <script>
    
@@ -82,7 +60,7 @@ if (is_mobile()) {
 
 ?>
     
-<div style="padding: 20px; max-width: 800px; margin: auto;">
+<div class="content-narrow">
     <h3>API Test Dashboard (Live-Scanner)</h3>
     <br>
 
@@ -90,9 +68,8 @@ if (is_mobile()) {
         <label>Gebe dein Passwort ein:</label><br>
         
         <!-- Das Auge-Feature im Wrapper -->
-        <div class="password-wrapper" style="position: relative; z-index: 999;">
-            <input type="password" id="passwordField" onkeyup="checkLive(this.value)" 
-                   style="position: relative; padding: 10px; width: 100%; background: #222; color: white; border: 1px solid #444;">
+        <div class="password-wrapper">
+            <input type="password" id="passwordField" onkeyup="checkLive(this.value)">
             <span id="toggleIcon" class="toggle-password" onclick="togglePassword()">👁️</span>
         </div>
     </div>

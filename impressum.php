@@ -19,7 +19,7 @@ if (is_mobile()) {
 }
 ?>
 
-<main class="content" style="padding: 40px 20px; max-width: 800px; margin: 0 auto;">
+<main class="content content-narrow">
     <h1>Impressum</h1>
     <p>Angaben gemäß § 5 TMG:</p>
     

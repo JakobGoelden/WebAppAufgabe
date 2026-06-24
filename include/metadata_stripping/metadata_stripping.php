@@ -153,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
     </form>
 
     <?php if ($message): ?>
-        <p style="color: #00ff00;"><?php echo $message; ?></p>
+        <p class="message-success"><?php echo $message; ?></p>
     <?php endif; ?>
 
         <?php if ($cleanViewPath): ?>
@@ -168,7 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
     <?php if ($jsonDownloadPath): ?>
         <div class="json-area">
             <h3>Gefundene Metadaten:</h3>
-            <a href="<?php echo $jsonDownloadPath; ?>" download class="btn" style="background: #28a745;">Metadaten als .JSON exportieren</a>
+            <a href="<?php echo $jsonDownloadPath; ?>" download class="btn btn-success">Metadaten als .JSON exportieren</a>
             <div class="json-box">
                 <pre><?php echo htmlspecialchars(json_encode($exifData, JSON_PRETTY_PRINT)); ?></pre>
             </div>

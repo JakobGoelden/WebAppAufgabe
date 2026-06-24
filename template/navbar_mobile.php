@@ -37,7 +37,7 @@
                 <?php endif; ?>
                 
                 <a href="<?= get_url('user.php') ?>" class="nav-button">Mein Bereich</a>
-                <a href="<?= get_url('auth.php?action=logout') ?>" class="nav-button" style="background-color: #ff4757; color: white;">Logout</a>
+                <a href="<?= get_url('auth.php?action=logout') ?>" class="nav-button nav-button-logout">Logout</a>
                 
             <?php else: ?>
                 

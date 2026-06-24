@@ -205,18 +205,8 @@ $action = $_GET['action'] ?? 'login';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo ($action === 'register') ? 'Registrieren' : 'Login'; ?></title>
     <link rel="stylesheet" href="./style/main.css">
-    <style>
-        body { text-align: center; }
-        form { background: grey; border-radius: 0.75em; padding: 20px; max-width: 28em; margin: 20px auto; }
-        input[type="text"], input[type="password"] { width: 90%; padding: 10px; margin-bottom: 10px; }
-        button { background: #337ab7; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 4px; }
-        .error { color: #a94442; background: #f2dede; border: 1px solid #ebccd1; padding: 10px; display: inline-block; border-radius: 4px; margin-top: 10px; }
-        .success { color: #3c763d; background: #dff0d8; border: 1px solid #d6e9c6; padding: 10px; display: inline-block; border-radius: 4px; margin-top: 10px; }
-        .toggle-link { margin-top: 15px; }
-        .underline { text-decoration: underline; color: white; }
-    </style>
 </head>
-<body>
+<body class="page-auth">
 
 <?php 
 if (is_mobile()) {
@@ -254,7 +244,7 @@ if (is_mobile()) {
         </div>
         <button type="submit" name="register">Registrieren</button>
         <div class="toggle-link">
-            Hast du schon einen Account? <a href="auth.php?action=login" style="color:white;">Hier einloggen</a>
+            Hast du schon einen Account? <a href="auth.php?action=login" class="link-white">Hier einloggen</a>
         </div>
         <p>Get <a class="underline" href="index.php">back to start</a></p>
     </form>
@@ -276,7 +266,7 @@ if (is_mobile()) {
         </div>
         <button type="submit" name="login">Login</button>
         <div class="toggle-link">
-            Noch kein Account? <a href="auth.php?action=register" style="color:white;">Hier registrieren</a>
+            Noch kein Account? <a href="auth.php?action=register" class="link-white">Hier registrieren</a>
         </div>
         <p>Get <a class="underline" href="index.php">back to start</a></p>
     </form>

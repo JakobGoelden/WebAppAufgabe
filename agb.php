@@ -20,7 +20,7 @@ if (is_mobile()) {
 ?>
 
 
-<main class="content" style="padding: 40px 20px; max-width: 800px; margin: 0 auto;">
+<main class="content content-narrow">
     <h1>Allgemeine Geschäftsbedingungen (AGB)</h1>
     <p>Stand: Juni 2026</p>
     

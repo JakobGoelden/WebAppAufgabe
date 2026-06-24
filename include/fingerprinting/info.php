@@ -16,24 +16,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <title>WebApp Projekt</title>
     <link rel="stylesheet" href="../../style/main.css">
     <link rel="stylesheet" href="../../style/navbar.css">
-    <style>
-        .block {
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 15px;
-        }
-
-        .red {
-            color: red;
-            font-weight: bold;
-        }
-    </style>
 
     <script>
         function show(value) {
             document.write(
-                "<span style='color:red;font-weight:bold'>" +
+                "<span class='text-red'>" +
                 value +
                 "</span>"
             );
@@ -84,7 +71,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     Browser fingerprinting is different: it collects information about your device and browser to create a profile that can identify you across many websites, often without storing anything on your computer.
     </p>
 
-    <div class="block">
+    <div class="info-block">
         <p>
         <b>Highly unique fingerprinting signals:</b><br>
         These are the most powerful tracking methods because they can often uniquely identify your device even without cookies or login data. They rely on subtle hardware and rendering differences.
@@ -102,7 +89,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         </p>
     </div>
 
-    <div class="block">
+    <div class="info-block">
         <p>
         <b>Location-related signals:</b><br>
         These values do not directly reveal your exact address, but they can narrow down your region and help correlate your activity across different websites.
@@ -119,7 +106,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         </p>
     </div>
 
-    <div class="block">
+    <div class="info-block">
         <p>
         <b>Device and technical information:</b><br>
         These values describe your browser and hardware setup. While each value seems harmless alone, together they create a detailed fingerprint of your device.

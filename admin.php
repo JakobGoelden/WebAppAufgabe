@@ -117,119 +117,6 @@ $users = $result->fetch_all(MYSQLI_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="./style/main.css">
-    <style>
-        .admin-wrapper {
-            max-width: 1100px; /* Etwas breiter für die extra Spalte */
-            margin: 40px auto;
-            padding: 0 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .glass-panel {
-            background-color: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 0.125em 0.625em rgba(0,0,0,0.3);
-        }
-
-        .glass-panel h2 {
-            margin-top: 0;
-            font-family: "Audiowide", sans-serif;
-            color: #4ade80;
-            text-align: left;
-            padding: 0;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            align-items: end;
-        }
-
-        input[type="text"], input[type="email"], input[type="password"], select {
-            width: 100%;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            border-radius: 4px;
-            font-family: "Quantico", sans-serif;
-        }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: #4ade80;
-            box-shadow: 0 0 8px rgba(74, 222, 128, 0.4);
-        }
-
-        .btn {
-            background: rgba(74, 222, 128, 0.2);
-            border: 1px solid #4ade80;
-            color: #4ade80;
-            padding: 10px 15px;
-            cursor: pointer;
-            border-radius: 4px;
-            font-family: "Quantico", sans-serif;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .btn:hover {
-            background: #4ade80;
-            color: #0d1117;
-            box-shadow: 0 0 15px rgba(74, 222, 128, 0.6);
-        }
-
-        .btn-danger {
-            border-color: #ff4757;
-            color: #ff4757;
-            background: rgba(255, 71, 87, 0.1);
-        }
-
-        .btn-danger:hover {
-            background: #ff4757;
-            color: white;
-            box-shadow: 0 0 15px rgba(255, 71, 87, 0.6);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        th {
-            color: #4ade80;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 0.9em;
-        }
-
-        tr:hover {
-            background-color: rgba(255, 255, 255, 0.02);
-        }
-
-        .inline-input {
-            width: 70%;
-            padding: 5px;
-            margin-right: 5px;
-        }
-        
-        .alert-success { color: #4ade80; background: rgba(74, 222, 128, 0.1); padding: 10px; border-radius: 4px; border: 1px solid #4ade80; margin-bottom: 20px;}
-        .alert-error { color: #ff4757; background: rgba(255, 71, 87, 0.1); padding: 10px; border-radius: 4px; border: 1px solid #ff4757; margin-bottom: 20px;}
-    </style>
 </head>
 <body>
 
@@ -284,14 +171,14 @@ if (is_mobile()) {
                 </select>
             </div>
             <div>
-                <button type="submit" class="btn" style="width: 100%;">Erstellen</button>
+                <button type="submit" class="btn btn-full">Erstellen</button>
             </div>
         </form>
     </div>
 
     <div class="glass-panel">
         <h2>[=] User Datenbank</h2>
-        <div style="overflow-x: auto;">
+        <div class="table-scroll">
             <table>
                 <tr>
                     <th>ID</th>
@@ -307,22 +194,22 @@ if (is_mobile()) {
                     <td><?= htmlspecialchars($u['username']) ?></td>
                     
                     <td>
-                        <form method="POST" style="display:flex; align-items:center;">
+                        <form method="POST" class="form-inline">
                             <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                             <input type="hidden" name="action" value="update_email">
                             <input type="hidden" name="user_id" value="<?= $u['id'] ?>">
                             <input type="email" name="updated_email" value="<?= htmlspecialchars($u['email'] ?? '') ?>" class="inline-input">
-                            <button type="submit" class="btn" style="padding: 5px 10px; font-size: 0.8em;">Save</button>
+                            <button type="submit" class="btn btn-sm">Save</button>
                         </form>
                     </td>
 
                     <td>
-                        <form method="POST" style="display:flex; align-items:center;">
+                        <form method="POST" class="form-inline">
                             <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                             <input type="hidden" name="action" value="update_password">
                             <input type="hidden" name="user_id" value="<?= $u['id'] ?>">
                             <input type="password" name="new_password" placeholder="Neues PW..." class="inline-input" required minlength="4">
-                            <button type="submit" class="btn" style="padding: 5px 10px; font-size: 0.8em;">Set</button>
+                            <button type="submit" class="btn btn-sm">Set</button>
                         </form>
                     </td>
 
@@ -332,24 +219,24 @@ if (is_mobile()) {
                     
                     <td>
                         <?php if ($u['id'] != $_SESSION['user_id']): ?>
-                            <form method="POST" style="display:inline;">
+                            <form method="POST" class="form-inline-action">
                                 <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                                 <input type="hidden" name="action" value="toggle_admin">
                                 <input type="hidden" name="user_id" value="<?= $u['id'] ?>">
                                 <input type="hidden" name="current_role" value="<?= $u['is_admin'] ?>">
-                                <button type="submit" class="btn" style="padding: 5px 10px; font-size: 0.8em;">
+                                <button type="submit" class="btn btn-sm">
                                     <?= $u['is_admin'] == 1 ? '-> User' : '-> Admin' ?>
                                 </button>
                             </form>
 
-                            <form method="POST" style="display:inline;" onsubmit="return confirm('User wirklich löschen?');">
+                            <form method="POST" class="form-inline-action" onsubmit="return confirm('User wirklich löschen?');">
                                 <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                                 <input type="hidden" name="action" value="delete">
                                 <input type="hidden" name="user_id" value="<?= $u['id'] ?>">
-                                <button type="submit" class="btn btn-danger" style="padding: 5px 10px; font-size: 0.8em;">Löschen</button>
+                                <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
                             </form>
                         <?php else: ?>
-                            <span style="color: gray; font-size: 0.8em;">(Dein Account)</span>
+                            <span class="text-muted">(Dein Account)</span>
                         <?php endif; ?>
                     </td>
                 </tr>
@@ -362,21 +249,10 @@ if (is_mobile()) {
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="https://code.jquery.com/ui/1.14.2/jquery-ui.js"></script>
 <script src="functions.js"></script>
-<div id="timeoutModal" title="SYSTEM_WARNING" style="display: none;">
+<div id="timeoutModal" title="SYSTEM_WARNING" class="modal-hidden">
   <p>Bist du noch da? Deine Sitzung läuft in wenigen Minuten ab.</p>
 </div>
 
-<style>
-    .ui-widget-overlay { z-index: 9998 !important; }
-    .ui-dialog { z-index: 9999 !important; background: #0d1117 !important; border: 2px solid #4ade80 !important; border-radius: 8px !important; box-shadow: 0 0 15px rgba(74, 222, 128, 0.2) !important; }
-    .ui-dialog-titlebar { background: transparent !important; border: none !important; border-bottom: 1px solid rgba(74, 222, 128, 0.3) !important; color: #4ade80 !important; font-family: 'Audiowide', sans-serif !important; }
-    .ui-dialog-content { background: transparent !important; color: white !important; font-family: 'Quantico', sans-serif !important; text-align: center !important; padding: 20px !important; }
-    .ui-dialog-buttonpane { background: transparent !important; border-top: 1px solid rgba(74, 222, 128, 0.3) !important; margin-top: 0 !important; padding: 10px !important; display: flex !important; justify-content: center !important; }
-    .ui-dialog-buttonpane .ui-dialog-buttonset { display: flex !important; gap: 10px !important; }
-    .ui-dialog .ui-button { background: #4ade80 !important; color: #0d1117 !important; border: none !important; font-family: 'Quantico', sans-serif !important; font-weight: bold !important; padding: 8px 16px !important; margin: 0 10px !important; }
-    .ui-dialog .ui-dialog-buttonset button:nth-child(2) { background: transparent !important; color: #ff4757 !important; border: 1px solid #ff4757 !important; }
-    .ui-dialog-titlebar-close { display: none !important; }
-</style>
 </body>
 </html>
 
