@@ -1,14 +1,19 @@
-<?php 
-include_once("config.php")
+<?php
+include_once("config.php");
 ?>
-<div>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.
 
-</div>
+<footer class="site-footer">
+    <div class="footer-content">
+        <p>&copy; <?php echo date("Y"); ?> WebAppName. Alle Rechte vorbehalten.</p>
+        <nav class="footer-links">
+            <a href="impressum.php">Impressum</a>
+            <a href="datenschutz.php">Datenschutz</a>
+            <a href="agb.php">AGB</a>
+        </nav>
+    </div>
+</footer>
 
 <div id="message_shown" class="message_hidden"></div>
-
-
 
 <?php if (isset($login_success) && $login_success): ?>
     <script>
@@ -19,5 +24,5 @@ include_once("config.php")
     </script>
 <?php endif; ?>
 
-
-</nav>
+</body>
+</html>
