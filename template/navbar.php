@@ -1,35 +1,48 @@
 <?php
 
 ?>
-<link rel="stylesheet" href="./style/navbar.css">
+
+<link rel="stylesheet" href="<?= get_url('style/navbar.css') ?>">
+<script>var BASE_URL = <?= json_encode(BASE_URL) ?>;</script>
+<script src="<?= get_url('functions.js') ?>"></script>
 <nav class="navbar">
-    <div class="nav-left">
-        <a href="index.php">WebAppName</a>
+    <div class="nav-subsite" id="GuardX">
+        <a href="<?= get_url('index.php') ?>">GuardX</a>
     </div>
 
     <div class="nav-subsite">
-        <a href="index.php">Subsite1</a>
+        <a href="<?= get_url('include/metadata_stripping/metadata_stripping.php') ?>">Metadaten entfernen</a>
     </div>
 
     <div class="nav-subsite">
-        <a href="index.php">Subsite2</a>
+        <a href="<?= get_url('include/fingerprinting/info.php') ?>">Fingerprinting</a>
     </div>
 
     <div class="nav-subsite">
-        <a href="index.php">Subsite3</a>
+        <a href="<?= get_url('include/api-calls/skript.php') ?>">Passwort Checker</a>
     </div>
 
-    <div class="nav-subsite">
-        <a href="index.php">Subsite4</a>
-    </div>
+    <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
+        
+        <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
+            <a href="<?= get_url('admin.php') ?>" class="nav-button">System Admin</a>
+            <a href="<?= get_url('user.php') ?>" class="nav-button">Mein Bereich</a>
+        <?php else: ?>
+            <a href="<?= get_url('user.php') ?>" class="nav-button">Mein Bereich</a>
+        <?php endif; ?>
 
-    <a href="auth.php" class="nav-button">Login</a>
+    <?php else: ?>
+        
+        <a href="<?= get_url('auth.php') ?>" class="nav-button">Login</a>
+        
+    <?php endif; ?>
+    
 </nav>
 
-    <div class="cyber-background">
-        <div class="glow-box box-1"></div>
-        <div class="glow-box box-2"></div>
-        <div class="glow-box box-3"></div>
-        <div class="glow-box box-4"></div>
-        <div class="glow-box box-5"></div>
-    </div>
+<div class="cyber-background">
+    <div class="glow-box box-1"></div>
+    <div class="glow-box box-2"></div>
+    <div class="glow-box box-3"></div>
+    <div class="glow-box box-4"></div>
+    <div class="glow-box box-5"></div>
+</div>

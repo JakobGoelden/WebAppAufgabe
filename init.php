@@ -1,14 +1,43 @@
 <?php
-// init.php - Wird auf jeder Seite ganz oben eingebunden
+$_baseDocRoot = realpath($_SERVER['DOCUMENT_ROOT']);
+$_baseProjectDir = realpath(__DIR__);
+$_basePath = str_replace('\\', '/', substr($_baseProjectDir, strlen($_baseDocRoot)));
+define('BASE_URL', rtrim($_basePath, '/') . '/');
+unset($_baseDocRoot, $_baseProjectDir, $_basePath);
 
-// Session starten, falls noch nicht passiert
+// show errors. kill before going live
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+// force session cookie to expire when browser closes
+session_set_cookie_params(0);
+
+// start session if not already active
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Zentrale Variablen definieren
-$is_logged_in = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
-$is_admin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == true;
-$username = $is_logged_in ? $_SESSION['username'] : null;
+// auto logout timeout in seconds (30 mins)
+$timeout_duration = 1800; 
 
-// Optional: Hier könntest du auch die DB-Verbindung ($conn) zentral öffnen
+// check if user was inactive for too long
+if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > $timeout_duration) {
+    
+    // clear and destroy session
+    session_unset();    
+    session_destroy();   
+
+    // kick back to login
+    header("Location: auth.php"); 
+    exit;
+}
+
+// update last activity timestamp on every load
+$_SESSION['last_activity'] = time();
+
+// generate csrf token if it doesnt exist yet
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+?>
+

@@ -1,0 +1,21 @@
+; ============================================================
+; Benoetigte PHP-Extensions fuer dieses Projekt
+; ============================================================
+;
+; In der php.ini (bei XAMPP: C:\xampp\php\php.ini) muessen
+; folgende Extensions AKTIV (nicht auskommentiert) sein:
+;
+;   extension=gd            ; Bildverarbeitung (Metadaten-Stripping)
+;   extension=mbstring      ; Multibyte-Strings (Voraussetzung fuer exif)
+;   extension=exif           ; EXIF-Metadaten aus JPEG-Bildern lesen
+;   extension=curl          ; API-Aufrufe (Passwort-Leak-Check via HaveIBeenPwned)
+;
+; Falls eine Zeile mit Semikolon (;) beginnt, ist sie deaktiviert.
+; Das Semikolon entfernen und Apache neu starten.
+;
+; Nach Aenderungen: XAMPP Control Panel -> Apache -> Stop -> Start
+; ============================================================
+
+
+; user-acc:  username: UdoErdmann password: AbgabeGruppe2
+; admin-acc: username: UdoAdmin   password: AbgabeGruppe2
