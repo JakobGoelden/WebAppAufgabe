@@ -69,6 +69,10 @@
 require_once("../../init.php");
 require_once("../../functions.php");
 require_once("../../config.php");
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: " . BASE_URL . "auth.php");
+    exit; 
+}
 
 if (is_mobile()) {
     include '../../template/navbar_mobile.php'; 
