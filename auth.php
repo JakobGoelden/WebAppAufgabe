@@ -180,7 +180,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                         // prep data for js redirect
                         $login_success = true;
-                        $success_message = "Erfolgreich eingeloggt! Weiterleitung...";
                         $redirect_url = ($user['is_admin'] == 1) ? "admin.php" : "user.php";
                     } else {
                         $error_message = "Falsches Passwort.";
@@ -284,6 +283,5 @@ if (is_mobile()) {
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="functions.js"></script>
 </body>
 </html>
