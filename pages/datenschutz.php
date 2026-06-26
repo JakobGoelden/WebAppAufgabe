@@ -1,6 +1,6 @@
 <?php
-require_once("init.php");
-require_once("functions.php");
+require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/functions.php';
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -8,14 +8,14 @@ require_once("functions.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datenschutz – GuardX</title>
-    <link rel="stylesheet" href="./style/main.css">
+    <link rel="stylesheet" href="<?= get_url('assets/css/main.css') ?>">
 </head>
 <body>
 <?php
 if (is_mobile()) {
-    include './template/navbar_mobile.php';
+    include __DIR__ . '/../templates/navbar_mobile.php';
 } else {
-    include './template/navbar.php';
+    include __DIR__ . '/../templates/navbar.php';
 }
 ?>
 
@@ -30,5 +30,5 @@ if (is_mobile()) {
 </main>
 
 <?php
-include_once("template/footer.php");
+include_once __DIR__ . '/../templates/footer.php';
 ?>

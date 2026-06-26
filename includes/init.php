@@ -1,11 +1,11 @@
 <?php
 $_baseDocRoot = realpath($_SERVER['DOCUMENT_ROOT']);
-$_baseProjectDir = realpath(__DIR__);
+$_baseProjectDir = realpath(dirname(__DIR__)); // init.php liegt in includes/ -> Projekt-Root ist eine Ebene höher
 $_basePath = str_replace('\\', '/', substr($_baseProjectDir, strlen($_baseDocRoot)));
 define('BASE_URL', rtrim($_basePath, '/') . '/');
 unset($_baseDocRoot, $_baseProjectDir, $_basePath);
 
-// show errors. kill before going live
+// show errors, kill before going live
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -28,7 +28,7 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) >
     session_destroy();   
 
     // kick back to login
-    header("Location: auth.php"); 
+    header("Location: " . BASE_URL . "pages/auth.php");
     exit;
 }
 

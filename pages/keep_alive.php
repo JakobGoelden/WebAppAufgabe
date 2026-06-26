@@ -1,5 +1,5 @@
 <?php
-require_once("init.php");
+require_once __DIR__ . '/../includes/init.php';
 
 header('Content-Type: application/json');
 

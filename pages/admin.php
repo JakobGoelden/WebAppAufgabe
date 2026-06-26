@@ -1,33 +1,33 @@
 <?php
-require_once("init.php");
-require_once("functions.php");
-require_once("config.php");
+require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/config.php';
 
 // login double check: kick out if session cookie is missing or invalid.
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
-    header("Location: auth.php");
+    header("Location: " . BASE_URL . "pages/auth.php");
     exit;
 }
 
 // privilege check: verify if the user has admin rights (is_admin = 1).
 if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] != 1) {
-    header("Location: index.php");
+    header("Location: " . BASE_URL . "index.php");
     exit;
 }
 
 $msg = '';
 $error = '';
 
-// POST Requests verarbeiten (CRUD Aktionen)
+// POST Requests verarbeiten (CRUD)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // CSRF Check für ALLE Aktionen!
+    // CSRF Check
     if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
         die("CSRF Token ungültig!");
     }
 
     $action = $_POST['action'] ?? '';
 
-    // 1. NEUEN USER ANLEGEN
+    // neuen user anlegen
     if ($action === 'create_user') {
         $new_user = trim($_POST['new_username']);
         $new_email = trim($_POST['new_email']);
@@ -55,11 +55,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Für die folgenden Aktionen brauchen wir die Target-ID
+    // target-id für die nächsten aktionen
     if (isset($_POST['user_id'])) {
         $target_id = (int)$_POST['user_id'];
 
-        // 2. USER LÖSCHEN
+        // user löschen
         if ($action === 'delete' && $target_id !== $_SESSION['user_id']) {
             $stmt = $conn->prepare("DELETE FROM user WHERE id = ?"); 
             $stmt->bind_param("i", $target_id);
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $msg = "User gelöscht.";
         }
 
-        // 3. ROLLE ÄNDERN
+        // rolle äbndern
         if ($action === 'toggle_admin' && $target_id !== $_SESSION['user_id']) {
             $new_status = (int)$_POST['current_role'] === 1 ? 0 : 1;
             $stmt = $conn->prepare("UPDATE user SET is_admin = ? WHERE id = ?");
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $msg = "Rolle wurde aktualisiert.";
         }
 
-        // 4. EMAIL UPDATEN
+        // email updaten
         if ($action === 'update_email') {
             $updated_email = trim($_POST['updated_email']);
             $stmt = $conn->prepare("UPDATE user SET email = ? WHERE id = ?");
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // 5. PASSWORT UPDATEN (NEU)
+        // passwort updaten
         if ($action === 'update_password') {
             $new_pass = $_POST['new_password'];
             if(!empty($new_pass)) {
@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Alle User auslesen für die Tabelle
+// alle user auslesen
 $result = $conn->query("SELECT id, username, email, is_admin FROM user ORDER BY id DESC");
 $users = $result->fetch_all(MYSQLI_ASSOC);
 ?>
@@ -115,17 +115,17 @@ $users = $result->fetch_all(MYSQLI_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="./style/main.css">
+    <title>Admin-Dashboard</title>
+    <link rel="stylesheet" href="<?= get_url('assets/css/main.css') ?>">
 </head>
 <body>
 
 <?php 
 if (is_mobile()) {
-    include './template/navbar_mobile.php'; 
+    include __DIR__ . '/../templates/navbar_mobile.php';
 } else {
-    include './template/navbar.php';        
-} 
+    include __DIR__ . '/../templates/navbar.php';
+}
 ?>
 
 <div class="glow-box box-1"></div>
@@ -146,13 +146,13 @@ if (is_mobile()) {
     <?php endif; ?>
 
     <div class="glass-panel">
-        <h2>[+] Neuen User registrieren</h2>
+        <h2>[+] Neuen Benutzer registrieren</h2>
         <form method="POST" class="form-grid">
             <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
             <input type="hidden" name="action" value="create_user">
             
             <div>
-                <label>Username</label>
+                <label>Benutzername</label>
                 <input type="text" name="new_username" required placeholder="admin_02">
             </div>
             <div>
@@ -166,7 +166,7 @@ if (is_mobile()) {
             <div>
                 <label>Rolle</label>
                 <select name="new_role">
-                    <option value="0">User</option>
+                    <option value="0">Benutzer</option>
                     <option value="1">Admin</option>
                 </select>
             </div>
@@ -177,12 +177,12 @@ if (is_mobile()) {
     </div>
 
     <div class="glass-panel">
-        <h2>[=] User Datenbank</h2>
+        <h2>[=] Benutzer-Datenbank</h2>
         <div class="table-scroll">
             <table>
                 <tr>
                     <th>ID</th>
-                    <th>Username</th>
+                    <th>Benutzername</th>
                     <th>E-Mail</th>
                     <th>Neues Passwort</th>
                     <th>Rolle</th>
@@ -199,7 +199,7 @@ if (is_mobile()) {
                             <input type="hidden" name="action" value="update_email">
                             <input type="hidden" name="user_id" value="<?= $u['id'] ?>">
                             <input type="email" name="updated_email" value="<?= htmlspecialchars($u['email'] ?? '') ?>" class="inline-input">
-                            <button type="submit" class="btn btn-sm">Save</button>
+                            <button type="submit" class="btn btn-sm">Speichern</button>
                         </form>
                     </td>
 
@@ -209,12 +209,12 @@ if (is_mobile()) {
                             <input type="hidden" name="action" value="update_password">
                             <input type="hidden" name="user_id" value="<?= $u['id'] ?>">
                             <input type="password" name="new_password" placeholder="Neues PW..." class="inline-input" required minlength="4">
-                            <button type="submit" class="btn btn-sm">Set</button>
+                            <button type="submit" class="btn btn-sm">Setzen</button>
                         </form>
                     </td>
 
                     <td style="color: <?= $u['is_admin'] == 1 ? '#4ade80' : '#ddd' ?>;">
-                        <?= htmlspecialchars($u['is_admin'] == 1 ? 'ADMIN' : 'USER') ?>
+                        <?= htmlspecialchars($u['is_admin'] == 1 ? 'ADMIN' : 'BENUTZER') ?>
                     </td>
                     
                     <td>
@@ -225,7 +225,7 @@ if (is_mobile()) {
                                 <input type="hidden" name="user_id" value="<?= $u['id'] ?>">
                                 <input type="hidden" name="current_role" value="<?= $u['is_admin'] ?>">
                                 <button type="submit" class="btn btn-sm">
-                                    <?= $u['is_admin'] == 1 ? '-> User' : '-> Admin' ?>
+                                    <?= $u['is_admin'] == 1 ? '-> Benutzer' : '-> Admin' ?>
                                 </button>
                             </form>
 
@@ -248,7 +248,7 @@ if (is_mobile()) {
 </div>
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="https://code.jquery.com/ui/1.14.2/jquery-ui.js"></script>
-<script src="functions.js"></script>
+<script src="<?= get_url('assets/js/functions.js') ?>"></script>
 <div id="timeoutModal" title="SYSTEM_WARNING" class="modal-hidden">
   <p>Bist du noch da? Deine Sitzung läuft in wenigen Minuten ab.</p>
 </div>

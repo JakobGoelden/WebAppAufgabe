@@ -1,11 +1,11 @@
 <?php
 
-require_once("../../init.php");
-require_once("../../functions.php");
-require_once("../../config.php");
+require_once __DIR__ . '/../../../includes/init.php';
+require_once __DIR__ . '/../../../includes/functions.php';
+require_once __DIR__ . '/../../../includes/config.php';
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: " . BASE_URL . "auth.php");
+    header("Location: " . BASE_URL . "pages/auth.php");
     exit; 
 }
 
@@ -131,18 +131,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metadaten entfernen</title>
-    <link rel="stylesheet" href="../../style/main.css">
-    <link rel="stylesheet" href="../../style/metadata_stripping.css">
-    <link rel="stylesheet" href="../../style/navbar.css">
+    <link rel="stylesheet" href="<?= get_url('assets/css/main.css') ?>">
+    <link rel="stylesheet" href="<?= get_url('assets/css/metadata_stripping.css') ?>">
+    <link rel="stylesheet" href="<?= get_url('assets/css/navbar.css') ?>">
 </head>
 <body>
 
     <?php 
     if (is_mobile()) {
-        include '../../template/navbar_mobile.php'; 
+        include __DIR__ . '/../../../templates/navbar_mobile.php';
     } else {
-        include '../../template/navbar.php';        
-    } 
+        include __DIR__ . '/../../../templates/navbar.php';
+    }
     ?>
     <div class="content"> 
     <h1>Metadaten entfernen</h1>

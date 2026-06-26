@@ -4,9 +4,9 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 // init session and generate csrf token
-require_once ("init.php");
-require_once ("functions.php");
-require_once ("config.php");
+require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/config.php';
 
 $login_success = false;
 $redirect_url = '';
@@ -15,17 +15,17 @@ $redirect_url = '';
 if (isset($_GET['action']) && $_GET['action'] === 'logout') {
     session_unset();
     session_destroy();
-    header("Location: index.php");
+    header("Location: " . BASE_URL . "index.php");
     exit;
 }
 
 // auto redirect if already logged in
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
-        header("Location: admin.php");
+        header("Location: " . BASE_URL . "pages/admin.php");
         exit;
     } else {
-        header("Location: user.php");
+        header("Location: " . BASE_URL . "pages/user.php");
         exit;
     }
 }
@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $stmt_reg_log->execute();
                     $stmt_reg_log->close();
 
-                    header("Location: auth.php?action=login&registered=1");
+                    header("Location: " . BASE_URL . "pages/auth.php?action=login&registered=1");
                     exit;
                 } else {
                     $error_message = "Fehler bei der Registrierung: " . $conn->error;
@@ -180,7 +180,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                         // prep data for js redirect
                         $login_success = true;
-                        $redirect_url = ($user['is_admin'] == 1) ? "admin.php" : "user.php";
+                        $redirect_url = ($user['is_admin'] == 1) ? get_url("pages/admin.php") : get_url("pages/user.php");
                     } else {
                         $error_message = "Falsches Passwort.";
                     }
@@ -203,23 +203,23 @@ $action = $_GET['action'] ?? 'login';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo ($action === 'register') ? 'Registrieren' : 'Login'; ?></title>
-    <link rel="stylesheet" href="./style/main.css">
+    <link rel="stylesheet" href="<?= get_url('assets/css/main.css') ?>">
 </head>
 <body class="page-auth">
 
 <?php 
 if (is_mobile()) {
-    include './template/navbar_mobile.php'; 
+    include __DIR__ . '/../templates/navbar_mobile.php';
 } else {
-    include './template/navbar.php';        
-} 
+    include __DIR__ . '/../templates/navbar.php';
+}
 ?>
 
 <div id="message_banner" class="message-banner-hidden"></div>
 
 <?php if ($action === 'register'): ?>
 
-    <form action="auth.php?action=register" method="POST">
+    <form action="<?= get_url('pages/auth.php?action=register') ?>" method="POST">
         <!-- hidden csrf input -->
         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
         
@@ -235,14 +235,14 @@ if (is_mobile()) {
         </div>
         <button type="submit" name="register">Registrieren</button>
         <div class="toggle-link">
-            Hast du schon einen Account? <a href="auth.php?action=login" class="link-white">Hier einloggen</a>
+            Hast du schon einen Account? <a href="<?= get_url('pages/auth.php?action=login') ?>" class="link-white">Hier einloggen</a>
         </div>
-        <p>Get <a class="underline" href="index.php">back to start</a></p>
+        <p>Get <a class="underline" href="<?= get_url('index.php') ?>">back to start</a></p>
     </form>
 
 <?php else: ?>
 
-    <form action="auth.php?action=login" method="POST">
+    <form action="<?= get_url('pages/auth.php?action=login') ?>" method="POST">
         <!-- hidden csrf input -->
         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
         
@@ -257,14 +257,14 @@ if (is_mobile()) {
         </div>
         <button type="submit" name="login">Login</button>
         <div class="toggle-link">
-            Noch kein Account? <a href="auth.php?action=register" class="link-white">Hier registrieren</a>
+            Noch kein Account? <a href="<?= get_url('pages/auth.php?action=register') ?>" class="link-white">Hier registrieren</a>
         </div>
-        <p>Get <a class="underline" href="index.php">back to start</a></p>
+        <p>Get <a class="underline" href="<?= get_url('index.php') ?>">back to start</a></p>
     </form>
 
 <?php endif; ?>
 
-<script src="functions.js"></script>
+<script src="<?= get_url('assets/js/functions.js') ?>"></script>
 
 <?php if ($error_message): ?>
     <script>showMessage(<?= json_encode($error_message) ?>, "error");</script>

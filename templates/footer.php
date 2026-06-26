@@ -1,14 +1,14 @@
 <?php
-include_once("config.php");
+include_once __DIR__ . '/../includes/config.php';
 ?>
 
 <footer class="site-footer">
     <div class="footer-content">
         <p>&copy; <?php echo date("Y"); ?> GuardX. Alle Rechte vorbehalten.</p>
         <nav class="footer-links">
-            <a href="<?= get_url('impressum.php') ?>">Impressum</a>
-            <a href="<?= get_url('datenschutz.php') ?>">Datenschutz</a>
-            <a href="<?= get_url('agb.php') ?>">AGB</a>
+            <a href="<?= get_url('pages/impressum.php') ?>">Impressum</a>
+            <a href="<?= get_url('pages/datenschutz.php') ?>">Datenschutz</a>
+            <a href="<?= get_url('pages/agb.php') ?>">AGB</a>
         </nav>
     </div>
 </footer>
@@ -18,7 +18,6 @@ include_once("config.php");
 <?php if (isset($login_success) && $login_success): ?>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Ruft DEINE CSS-Funktion auf, nicht Bootstrap
             handleSuccessfulLogin("<?php echo $redirect_url; ?>");
         });
     </script>

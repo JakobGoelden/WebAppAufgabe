@@ -1,11 +1,11 @@
 <?php
-require_once("init.php");
-require_once("functions.php");
-require_once("config.php");
+require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/config.php';
 
 // kick out if not logged in
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
-    header("Location: auth.php");
+    header("Location: " . BASE_URL . "pages/auth.php");
     exit;
 }
 
@@ -24,14 +24,14 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $current_user_data = $stmt->get_result()->fetch_assoc();
-$current_email = $current_user_data['email'] ?? 'None provided yet';
+$current_email = $current_user_data['email'] ?? 'Noch nicht angegeben';
 
 // handle form submits
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
     // security check: validate csrf token
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        die("CSRF token validation failed.");
+        die("CSRF-Token-Validierung fehlgeschlagen.");
     }
 
     // 1. update email
@@ -42,13 +42,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("si", $new_email, $user_id);
             if ($stmt->execute()) {
-                $message = "Email updated successfully!";
+                $message = "E-Mail erfolgreich aktualisiert!";
                 $current_email = $new_email;
             } else {
-                $error = "Error updating email.";
+                $error = "Fehler beim Aktualisieren der E-Mail.";
             }
         } else {
-            $error = "Invalid email format.";
+            $error = "Ungültiges E-Mail-Format.";
         }
     }
 
@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $confirm_pw = $_POST['confirm_password'];
 
         if ($new_pw !== $confirm_pw) {
-            $error = "New passwords do not match.";
+            $error = "Die neuen Passwörter stimmen nicht überein.";
         } else {
             // verify current password first
             $sql = "SELECT password FROM user WHERE id = ?";
@@ -75,9 +75,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $stmt = $conn->prepare($sql);
                 $stmt->bind_param("si", $new_hash, $user_id);
                 $stmt->execute();
-                $message = "Password updated successfully!";
+                $message = "Passwort erfolgreich aktualisiert!";
             } else {
-                $error = "Current password is incorrect.";
+                $error = "Das aktuelle Passwort ist falsch.";
             }
         }
     }
@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($stmt->execute()) {
             // kill session and redirect
             session_destroy();
-            header("Location: auth.php?msg=account_deleted");
+            header("Location: " . BASE_URL . "pages/auth.php?msg=account_deleted");
             exit;
         }
     }
@@ -98,69 +98,69 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile</title>
-    <link rel="stylesheet" href="./style/main.css">
+    <title>Mein Profil</title>
+    <link rel="stylesheet" href="<?= get_url('assets/css/main.css') ?>">
 </head>
 <body class="page-user">
 <?php 
 if (is_mobile()) {
-    include './template/navbar_mobile.php'; 
+    include __DIR__ . '/../templates/navbar_mobile.php';
 } else {
-    include './template/navbar.php';        
-} 
+    include __DIR__ . '/../templates/navbar.php';
+}
 ?>
 <div class="dashboard-container">
-    <h1>Hello, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h1>
+    <h1>Hallo, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h1>
 
     <?php if($message): ?> <div class="alert success"><?php echo $message; ?></div> <?php endif; ?>
     <?php if($error): ?> <div class="alert danger"><?php echo $error; ?></div> <?php endif; ?>
 
     <div class="section">
-        <h2>Manage Email Address</h2>
-        <p><small>Current Email: <strong><?php echo htmlspecialchars($current_email); ?></strong></small></p>
-        <form action="user.php" method="POST">
+        <h2>E-Mail-Adresse verwalten</h2>
+        <p><small>Aktuelle E-Mail: <strong><?php echo htmlspecialchars($current_email); ?></strong></small></p>
+        <form action="<?= get_url('pages/user.php') ?>" method="POST">
             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
             <div class="form-group">
-                <label>New Email:</label>
+                <label>Neue E-Mail:</label>
                 <input type="email" name="new_email" required>
             </div>
-            <button type="submit" name="update_email">Save Email</button>
+            <button type="submit" name="update_email">E-Mail speichern</button>
         </form>
     </div>
 
     <div class="section">
-        <h2>Change Password</h2>
-        <form action="user.php" method="POST">
+        <h2>Passwort ändern</h2>
+        <form action="<?= get_url('pages/user.php') ?>" method="POST">
             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-            <div class="form-group"><label>Current Password:</label><input type="password" name="current_password" required></div>
-            <div class="form-group"><label>New Password:</label><input type="password" name="new_password" required></div>
-            <div class="form-group"><label>Confirm New Password:</label><input type="password" name="confirm_password" required></div>
-            <button type="submit" name="update_password">Update Password</button>
+            <div class="form-group"><label>Aktuelles Passwort:</label><input type="password" name="current_password" required></div>
+            <div class="form-group"><label>Neues Passwort:</label><input type="password" name="new_password" required></div>
+            <div class="form-group"><label>Neues Passwort bestätigen:</label><input type="password" name="confirm_password" required></div>
+            <button type="submit" name="update_password">Passwort aktualisieren</button>
         </form>
     </div>
 
     <div class="section section-danger">
-        <h2 class="heading-danger">Danger Zone</h2>
-        <p>Once you delete your account, there is no going back. Please be certain.</p>
-        <form action="user.php" method="POST" onsubmit="return confirm('Do you really want to delete your account?');">
+        <h2 class="heading-danger">Gefahrenzone</h2>
+        <p>Wenn du dein Konto löschst, gibt es kein Zurück. Bitte sei dir sicher.</p>
+        <form action="<?= get_url('pages/user.php') ?>" method="POST" onsubmit="return confirm('Möchtest du dein Konto wirklich löschen?');">
             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-            <button type="submit" name="delete_account" class="btn-delete">Delete My Account</button>
+            <button type="submit" name="delete_account" class="btn-delete">Mein Konto löschen</button>
         </form>
     </div>
 
-    <form action="./admin_logout.php" class="mt-20">
-        <button type="submit" class="btn-delete">Logout</button>
+    <form action="<?= get_url('pages/admin_logout.php') ?>" class="mt-20">
+        <button type="submit" class="btn-delete">Abmelden</button>
     </form>
 </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://code.jquery.com/ui/1.14.2/jquery-ui.js"></script>
-    <script src="functions.js"></script>
+    <script src="<?= get_url('assets/js/functions.js') ?>"></script>
 
     <div id="timeoutModal" title="SYSTEM_WARNING" class="modal-hidden">
         <p>Bist du noch da? Deine Sitzung läuft in wenigen Minuten ab.</p>
@@ -170,46 +170,8 @@ if (is_mobile()) {
 </div>
 
 <script>
-    var warningTimer, logoutTimer;
-
-    function startMyTimers() {
-        clearTimeout(warningTimer);
-        clearTimeout(logoutTimer);
-
-        // Timer 1: Nach 10 Minuten Warnung anzeigen
-        warningTimer = setTimeout(function() {
-            
-            $("#timeoutModal").dialog({
-                modal: true,
-                width: 400,
-                draggable: false, 
-                resizable: false, 
-                buttons: {
-                    "Bleiben": function() {
-                        fetch('keep_alive.php'); 
-                        $(this).dialog("destroy"); // Reißt das Fenster restlos ab
-                        startMyTimers(); // Startet die 3 Sekunden wieder von vorn
-                    },
-                    "Ausloggen": function() {
-                        // FIX: Leitet jetzt auf dein echtes Logout-Skript um!
-                        window.location.href = 'admin_logout.php';
-                    }
-                }
-            });
-
-            // Timer 2: Nach weiteren 2 Minuten automatischer Logout
-            logoutTimer = setTimeout(function() {
-                window.location.href = 'admin_logout.php';
-            }, 120000);
-
-        }, 600000);
-    }
-
-    // Wenn die Seite geladen ist und jQuery bereit ist: Start!
     $(document).ready(function() {
-        if ($("#timeoutModal").length > 0) {
-            startMyTimers();
-        }
+        startSessionTimers();
     });
 </script>
 </body>

@@ -1,1 +1,5 @@
 privat_umgebung/
+
+# Laufzeit-Uploads des Metadaten-Tools (nicht versionieren)
+pages/tools/metadata-stripping/uploads/
+pages/tools/metadata-stripping/clean/

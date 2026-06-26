@@ -2,38 +2,38 @@
 
 ?>
 
-<link rel="stylesheet" href="<?= get_url('style/navbar.css') ?>">
+<link rel="stylesheet" href="<?= get_url('assets/css/navbar.css') ?>">
 <script>var BASE_URL = <?= json_encode(BASE_URL) ?>;</script>
-<script src="<?= get_url('functions.js') ?>"></script>
+<script src="<?= get_url('assets/js/functions.js') ?>"></script>
 <nav class="navbar">
     <div class="nav-subsite" id="GuardX">
         <a href="<?= get_url('index.php') ?>">GuardX</a>
     </div>
 
     <div class="nav-subsite">
-        <a href="<?= get_url('include/metadata_stripping/metadata_stripping.php') ?>">Metadaten entfernen</a>
+        <a href="<?= get_url('pages/tools/metadata-stripping/metadata_stripping.php') ?>">Metadaten entfernen</a>
     </div>
 
     <div class="nav-subsite">
-        <a href="<?= get_url('include/fingerprinting/info.php') ?>">Fingerprinting</a>
+        <a href="<?= get_url('pages/tools/fingerprinting/info.php') ?>">Fingerprinting</a>
     </div>
 
     <div class="nav-subsite">
-        <a href="<?= get_url('include/api-calls/skript.php') ?>">Passwort Checker</a>
+        <a href="<?= get_url('pages/tools/password-checker/skript.php') ?>">Passwort Checker</a>
     </div>
 
     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
         
         <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
-            <a href="<?= get_url('admin.php') ?>" class="nav-button">System Admin</a>
-            <a href="<?= get_url('user.php') ?>" class="nav-button">Mein Bereich</a>
+            <a href="<?= get_url('pages/admin.php') ?>" class="nav-button">System Admin</a>
+            <a href="<?= get_url('pages/user.php') ?>" class="nav-button">Mein Bereich</a>
         <?php else: ?>
-            <a href="<?= get_url('user.php') ?>" class="nav-button">Mein Bereich</a>
+            <a href="<?= get_url('pages/user.php') ?>" class="nav-button">Mein Bereich</a>
         <?php endif; ?>
 
     <?php else: ?>
-        
-        <a href="<?= get_url('auth.php') ?>" class="nav-button">Login</a>
+
+        <a href="<?= get_url('pages/auth.php') ?>" class="nav-button">Login</a>
         
     <?php endif; ?>
     

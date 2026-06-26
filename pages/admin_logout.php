@@ -1,5 +1,5 @@
 <?php
-require_once("init.php");
+require_once __DIR__ . '/../includes/init.php';
 //delete session variables
 session_unset();
 
@@ -7,6 +7,6 @@ session_unset();
 session_destroy();
 
 //redirect to login page
-header("Location: index.php");
+header("Location: " . BASE_URL . "index.php");
 exit;
 ?>
