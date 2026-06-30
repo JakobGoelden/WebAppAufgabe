@@ -8,7 +8,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <head>
     <meta charset="UTF-8">
@@ -65,87 +65,87 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <br>
 
     <p>
-    Many people think cookies are the main way websites track users online. 
-    While cookies are widely used, they are only one part of modern tracking. 
-    Cookies can usually be deleted, blocked, or restricted to a single website. 
-    Browser fingerprinting is different: it collects information about your device and browser to create a profile that can identify you across many websites, often without storing anything on your computer.
+    Viele Menschen denken, dass Cookies die wichtigste Methode sind, mit der Websites Nutzer im Internet verfolgen.
+    Cookies sind zwar weit verbreitet, aber sie sind nur ein Teil des modernen Trackings.
+    Cookies können in der Regel gelöscht, blockiert oder auf eine einzelne Website beschränkt werden.
+    Browser-Fingerprinting funktioniert anders: Es sammelt Informationen über dein Gerät und deinen Browser, um ein Profil zu erstellen, das dich über viele Websites hinweg identifizieren kann – oft ohne etwas auf deinem Computer zu speichern.
     </p>
 
     <div class="info-block">
         <p>
-        <b>Highly unique fingerprinting signals:</b><br>
-        These are the most powerful tracking methods because they can often uniquely identify your device even without cookies or login data. They rely on subtle hardware and rendering differences.
+        <b>Besonders einzigartige Fingerprinting-Signale:</b><br>
+        Dies sind die wirksamsten Tracking-Methoden, da sie dein Gerät oft eindeutig identifizieren können – auch ohne Cookies oder Anmeldedaten. Sie nutzen feine Unterschiede in Hardware und Darstellung.
         </p>
 
         <p>
-        <b>Canvas Fingerprint:</b> (Yours starts with: <script>show(canvasFingerprint.substring(0, 50) + "...");</script>)
-        Websites can force your browser to draw invisible graphics. Differences in fonts, GPU, drivers, and system configuration make the result highly unique.
+        <b>Canvas-Fingerprint:</b> (Deiner beginnt mit: <script>show(canvasFingerprint.substring(0, 50) + "...");</script>)
+        Websites können deinen Browser dazu bringen, unsichtbare Grafiken zu zeichnen. Unterschiede bei Schriftarten, GPU, Treibern und Systemkonfiguration machen das Ergebnis sehr einzigartig.
         </p>
 
         <p>
-        <b>WebGL Vendor:</b> (Yours is: <script>show(webglVendor);</script>) and 
-        <b>Renderer:</b> (Yours is: <script>show(webglRenderer);</script>)
-        WebGL exposes detailed graphics hardware information that can strongly identify your device and GPU setup.
-        </p>
-    </div>
-
-    <div class="info-block">
-        <p>
-        <b>Location-related signals:</b><br>
-        These values do not directly reveal your exact address, but they can narrow down your region and help correlate your activity across different websites.
-        </p>
-
-        <p>
-        <b>Language:</b> (Yours is: <script>show(language);</script>)
-        Your browser language setting can reveal your country or preferred region and helps build a regional profile.
-        </p>
-
-        <p>
-        <b>Timezone:</b> (Yours is: <script>show(timezone);</script>)
-        Your timezone often reveals your general geographic location and can be used to link browsing activity across sessions.
+        <b>WebGL-Hersteller:</b> (Deiner ist: <script>show(webglVendor);</script>) und
+        <b>Renderer:</b> (Deiner ist: <script>show(webglRenderer);</script>)
+        WebGL gibt detaillierte Informationen über die Grafikhardware preis, die dein Gerät und deine GPU-Konfiguration stark identifizieren können.
         </p>
     </div>
 
     <div class="info-block">
         <p>
-        <b>Device and technical information:</b><br>
-        These values describe your browser and hardware setup. While each value seems harmless alone, together they create a detailed fingerprint of your device.
+        <b>Standortbezogene Signale:</b><br>
+        Diese Werte verraten nicht direkt deine genaue Adresse, aber sie können deine Region eingrenzen und helfen, deine Aktivitäten über verschiedene Websites hinweg zu verknüpfen.
         </p>
 
         <p>
-        <b>User Agent:</b> (Yours is: <script>show(userAgent);</script>)
-        This reveals your browser, operating system, and device type, making it a core part of most tracking systems.
+        <b>Sprache:</b> (Deine ist: <script>show(language);</script>)
+        Die Spracheinstellung deines Browsers kann dein Land oder deine bevorzugte Region verraten und hilft beim Erstellen eines regionalen Profils.
         </p>
 
         <p>
-        <b>Screen Resolution:</b> (Yours is: <script>show(screenSize);</script>)
-        Your screen size helps distinguish your device from others and contributes to fingerprint uniqueness.
+        <b>Zeitzone:</b> (Deine ist: <script>show(timezone);</script>)
+        Deine Zeitzone verrät oft deinen ungefähren geografischen Standort und kann genutzt werden, um Browsing-Aktivitäten über Sitzungen hinweg zu verknüpfen.
+        </p>
+    </div>
+
+    <div class="info-block">
+        <p>
+        <b>Geräte- und technische Informationen:</b><br>
+        Diese Werte beschreiben deinen Browser und deine Hardware. Auch wenn jeder einzelne Wert harmlos erscheint, ergeben sie zusammen einen detaillierten Fingerabdruck deines Geräts.
         </p>
 
         <p>
-        <b>CPU Cores:</b> (Yours is: <script>show(cpuCores);</script>)
-        The number of CPU cores gives insight into your hardware performance and device class.
+        <b>User Agent:</b> (Deiner ist: <script>show(userAgent);</script>)
+        Dies verrät deinen Browser, dein Betriebssystem und deinen Gerätetyp und ist damit ein zentraler Bestandteil der meisten Tracking-Systeme.
         </p>
 
         <p>
-        <b>Device Memory:</b> (Yours is: <script>show(deviceMemory);</script>)
-        Reports your available RAM, helping identify whether you're on a low-end or high-end device.
+        <b>Bildschirmauflösung:</b> (Deine ist: <script>show(screenSize);</script>)
+        Deine Bildschirmgröße hilft, dein Gerät von anderen zu unterscheiden, und trägt zur Einzigartigkeit des Fingerprints bei.
         </p>
 
         <p>
-        <b>Color Depth:</b> (Yours is: <script>show(colorDepth);</script>)
-        A small but still measurable display characteristic used in fingerprinting.
+        <b>CPU-Kerne:</b> (Deine Anzahl: <script>show(cpuCores);</script>)
+        Die Anzahl der CPU-Kerne gibt Aufschluss über die Leistung deiner Hardware und die Geräteklasse.
         </p>
 
         <p>
-        <b>Do Not Track:</b> (Yours is: <script>show(doNotTrack);</script>)
-        A privacy setting intended to reduce tracking, but most websites ignore it completely.
+        <b>Gerätespeicher:</b> (Deiner ist: <script>show(deviceMemory);</script>)
+        Gibt deinen verfügbaren Arbeitsspeicher an und hilft zu erkennen, ob du ein günstiges oder hochwertiges Gerät nutzt.
+        </p>
+
+        <p>
+        <b>Farbtiefe:</b> (Deine ist: <script>show(colorDepth);</script>)
+        Ein kleines, aber messbares Anzeige-Merkmal, das beim Fingerprinting verwendet wird.
+        </p>
+
+        <p>
+        <b>Do Not Track:</b> (Deiner ist: <script>show(doNotTrack);</script>)
+        Eine Datenschutzeinstellung, die Tracking reduzieren soll, aber von den meisten Websites vollständig ignoriert wird.
         </p>
     </div>
 
     <p>
-        None of these values alone are guaranteed to identify you. 
-        The danger comes from combining them together. 
-        When dozens of small details are collected at once, they can create a fingerprint unique enough to track you across websites, even without cookies or logging into an account.
+        Keiner dieser Werte allein kann dich garantiert identifizieren.
+        Die Gefahr entsteht durch die Kombination.
+        Wenn dutzende kleine Details gleichzeitig gesammelt werden, können sie einen Fingerabdruck erzeugen, der einzigartig genug ist, um dich über Websites hinweg zu verfolgen – auch ohne Cookies oder Anmeldung bei einem Konto.
     </p>
 </body>
